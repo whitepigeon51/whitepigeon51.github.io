@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="title:less 32~37，转义编码这里考察的是宽字节注入宽字节注入原理即是利用编码转换，将服务器端强制添加的本来用于转义的\符号吃掉，从而能使攻击者输入的引号起到闭合作用，以至于可以进行SQL注入。涉及到的基本概念字符、字符集字符(character)是组成字符集(character set)的基本单位。对字符赋予一个数值(encoding)来确定这个字符在该字符集中的位置。UTF8由于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/04/17/LESS%2032~37/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:less 32~37，转义编码这里考察的是宽字节注入宽字节注入原理即是利用编码转换，将服务器端强制添加的本来用于转义的\符号吃掉，从而能使攻击者输入的引号起到闭合作用，以至于可以进行SQL注入。涉及到的基本概念字符、字符集字符(character)是组成字符集(character set)的基本单位。对字符赋予一个数值(encoding)来确定这个字符在该字符集中的位置。UTF8由于">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-17T06:04:38.620Z">
+<meta property="article:modified_time" content="2022-02-24T03:14:44.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LESS 32~37" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/LESS%2032~37/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.620Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-32-37，转义编码"><a href="#title-less-32-37，转义编码" class="headerlink" title="title:less 32~37，转义编码"></a>title:less 32~37，转义编码</h2><p>这里考察的是宽字节注入<br>宽字节注入原理即是利用编码转换，将服务器端强制添加的本来用于转义的\符号吃掉，<br>从而能使攻击者输入的引号起到闭合作用，以至于可以进行SQL注入。<br>涉及到的基本概念<br>字符、字符集<br>字符(character)是组成字符集(character set)的基本单位。对字符赋予一个数值(encoding)来确定这个字符在该字符集中的位置。<br>UTF8<br>由于ASCII表示的字符只有128个，因此网络世界的规范是使用UNICODE编码，但是用ASCII表示的字符使用UNICODE并不高效。因此出现了中间格式字符集，被称为通用转换格式，及UTF(Universal Transformation Format)。<br>宽字节<br>GB2312、GBK、GB18030、BIG5、Shift_JIS等这些都是常说的宽字节，实际上只有两字节。宽字节带来的安全问题主要是吃ASCII字符(一字节)的现象，即将两个ascii字符误认为是一个宽字节字符。<br>1.MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection;<br>2.进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：<br>使用每个数据字段的CHARACTER SET设定值;<br>若上述值不存在，则使用对应数据表的DEFAULT CHARACTER SET设定值(MySQL扩展，非SQL标准);<br>若上述值不存在，则使用对应数据库的DEFAULT CHARACTER SET设定值;<br>若上述值不存在，则使用character_set_server设定值。<br>将操作结果从内部操作字符集转换为character_set_results。<br>重点：宽字节注入发生的位置就是PHP发送请求到MYSQL时字符集使用character_set_client设置值进行了一次编码。<br>宽字节注入原理：<br>GBK 占用两字节<br>ASCII占用一字节<br>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>大家都知道%df’ 被PHP转义（开启GPC、用addslashes函数，或者icov等），单引号被加上反斜杠\，变成了 %df\’，其中\的十六进制是 %5C ，那么现在 %df\’ &#x3D;%df%5c%27，<br>如果程序的默认字符集是GBK等宽字节字符集，则MySQL用GBK的编码时，会认为 %df%5c 是一个宽字符，也就是縗，也就是说：%df\’ &#x3D; %df%5c%27&#x3D;縗’，有了单引号就好注入了。<br>宽字节注入指的是mysql数据库在使用宽字节（GBK）编码时，会认为两个字符是一个汉字（前一个ascii码要大于128（比如%df），才到汉字的范围），而且当我们输入单引号时，mysql会调用转义函数，将单引号变为&#39;，<br>其中\的十六进制是%5c,mysql的GBK编码，会认为%df%5c是一个宽字节，也就是’運’，从而使单引号闭合（逃逸），进行注入攻击<br>————————<br>从源码，可以看出，单双引号以及右划线被\注释掉了，GBK的中文编码及符号是双字节来表示的，英文编码是用ASCII码表示的，即用单字节表示。所以我们可以利用宽字节的方式用%df或%aa与\结合成一个字节（繁体汉字），从而剔除掉\的影响。<br>payload：<br>?id&#x3D;-1%df%27 union select 1,2,3–+<br>数据库名：?id&#x3D;-1%df%27 union select 1,database(),3 –+<br>由于union查询语句‘security’需要用单引号，而单引号会被注释掉，所以这里将security转换为十六进制表达<br>数据表：?id&#x3D;-1%df%27%20union%20select%201,group_concat(table_name),3%20from%20information_schema.tables%20where%20table_schema&#x3D;database()–+<br>或者是：?id&#x3D;-1%df%27 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema&#x3D;0x7365637572697479–+<br>列名：?id&#x3D;-1%df%27 union select 1,group_concat(column_name),3 from information_schema.columns where table_name&#x3D;0x7573657273 and table_schema&#x3D;0x7365637572697479–+<br>数据：?id&#x3D;-1%df%27 union select 1,group_concat(username,0x7e,password),3 from users–+<br>——————<br>less 33基本一样<br>——————<br>less34注意点<br>在这里我想在区分一下在啊url输入和在下面框里输入的区别：<br>get和post提交方式的区别会对%进行编码，如果直接在url输入的话%正常上传，如果你用post的方式提交的话，%会被编码成%25，这样就会出现问题。<br>解决方法是通过burpsuit进行抓包，然后将多编码的25删掉之后再发送就可以了。<br>补充一个方法：我们可以将 UTF-8 的’转换为 UTF-16 的�’，例如：id&#x3D;a�’ union select 1,2–+</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/LESS%2032~37/" data-id="cl22vvyxy0000l4vj38rl2gi7" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/17/less%2038~42/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/17/less%2029~31/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="title:less 29~31less29类似于架构了一个firewall，通过以tomcat为引擎的jsp服务器对输入的id进行筛选，再传给以apache为引擎的PHP服务器。服务器端有两个部分：第一部分为tomcat为引擎的jsp型服务器，第二部分为apache为引擎的php服务器，真正提供web服务的是php服务器。工作流程为：client访问服务器，能直接访问到tomcat服务器，然后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/04/17/less%2029~31/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:less 29~31less29类似于架构了一个firewall，通过以tomcat为引擎的jsp服务器对输入的id进行筛选，再传给以apache为引擎的PHP服务器。服务器端有两个部分：第一部分为tomcat为引擎的jsp型服务器，第二部分为apache为引擎的php服务器，真正提供web服务的是php服务器。工作流程为：client访问服务器，能直接访问到tomcat服务器，然后">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-17T06:04:38.616Z">
+<meta property="article:modified_time" content="2022-02-23T11:11:52.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-less 29~31" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/less%2029~31/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.616Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-29-31"><a href="#title-less-29-31" class="headerlink" title="title:less 29~31"></a>title:less 29~31</h2><p>less29类似于架构了一个firewall，通过以tomcat为引擎的jsp服务器对输入的id进行筛选，再传给以apache为引擎的PHP服务器。<br>服务器端有两个部分：第一部分为tomcat为引擎的jsp型服务器，第二部分为apache为引擎的php服务器，真正提供web服务的是php服务器。<br>工作流程为：client访问服务器，能直接访问到tomcat服务器，然后tomcat服务器再向apache服务器请求数据。数据返回路径则相反。<br>&#x2F;&#x2F;WAF implimentation with a whitelist approach….. only allows input to be Numeric.<br>&#x2F;&#x2F;只允许数字型数字<br>function whitelist($input)<br>{<br>    $match &#x3D; preg_match(“&#x2F;^\d+$&#x2F;“, $input);<br>    &#x2F;&#x2F;  正则表达式：&#x2F;^\d+$&#x2F;<br>    &#x2F;&#x2F;  ^匹配输入字符串的开始位置。<br>    &#x2F;&#x2F;  \d任意一个数字，0~9 中的任意一个[0-9]<br>    &#x2F;&#x2F; +修饰匹配次数为至少 1 次。<br>    &#x2F;&#x2F; $匹配输入字符串的结尾位置</p>
+<pre><code>if($match)//如果匹配，用户输入了数字的话，就允许继续
+&#123;
+    //echo &quot;you are good&quot;;
+    //return $match;
+&#125;
+else
+&#123;   
+    header(&#39;Location: hacked.php&#39;);//重定向
+    //echo &quot;you are bad&quot;;
+&#125;
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; The function below immitates the behavior of parameters when subject to HPP (HTTP Parameter Pollution).</p>
+<p>function java_implimentation($query_string)<br>{<br>    $q_s &#x3D; $query_string;<br>    $qs_array&#x3D; explode(“&amp;”,$q_s);<br>&#x2F;&#x2F;  explode()作用:把字符串打散为数组<br>&#x2F;&#x2F;如果输入一个?id&#x3D;1&amp;id&#x3D;2&amp;id&#x3D;3，就会分割成{id&#x3D;1,id&#x3D;2,id&#x3D;3}这样的数组</p>
+<pre><code>foreach($qs_array as $key =&gt; $value)
+&#123;
+    $val=substr($value,0,2);//截断字符id=1，取前面id
+    if($val==&quot;id&quot;)
+    &#123;
+        $id_value=substr($value,3,30); //取id后面的数字
+        return $id_value;
+
+        break;
+    &#125;
+
+&#125;
+</code></pre>
+<p>}<br>利用Java_implimentation方法的漏洞，当我们输入多个id并且用&amp;隔开时，这个方法只会对第一个id的值进行检验，<br>这时我们可以在后面的id值里面进行注入，绕过他的防火墙。<br>所以我们可以构建payload：?id&#x3D;1&amp;id&#x3D; ‘union select 1,2,database() –+<br>接下来正常注入就可以。<br>——————————<br>less 30的闭合方式改为“<br>——————————<br>less 31的闭合方式改为”）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/less%2029~31/" data-id="cl22vvyy70005l4vj4v7tdzs6" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/17/LESS%2032~37/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/17/less%2018~22/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

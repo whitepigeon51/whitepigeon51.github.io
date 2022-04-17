@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;typedef struct Node{    int data;    struct Node *next;}Node;void createLink(Node *head,int size);void travelLink(Node *head);void travelLink(Node *head)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空">
+<meta property="og:url" content="http://example.com/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;typedef struct Node{    int data;    struct Node *next;}Node;void createLink(Node *head,int size);void travelLink(Node *head);void travelLink(Node *head)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-17T06:04:38.566Z">
+<meta property="article:modified_time" content="2021-11-21T13:52:42.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-链表的创建，查找，删除，输出" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.566Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>typedef struct Node{<br>    int data;<br>    struct Node *next;<br>}Node;<br>void createLink(Node *head,int size);<br>void travelLink(Node *head);<br>void travelLink(Node *head);<br>void insertForward(Node *head,int data);<br>void insertBack(Node *head,int data);<br>void deleteSame(Node *head);<br>void reverseLink(Node *head);<br>void deleteLink(Node *head);<br>void isEmpty(Node *head);<br>int main(){<br>    &#x2F;&#x2F;主函数中不能指定一个头指针，应该定义一个头指针指向头结点<br>    Node <em>head &#x3D; (Node</em>)malloc(sizeof(Node));<br>    head -&gt; next &#x3D; NULL;<br>    createLink(head,10);&#x2F;&#x2F;创建链表<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    insertForward(head,100);&#x2F;&#x2F;头插法<br>    insertBack(head,200);&#x2F;&#x2F;尾插法<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    deleteSame(head);&#x2F;&#x2F;删除相同元素<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    reverseLink(head);&#x2F;&#x2F;翻转链表元素<br>    travelLink(head);&#x2F;&#x2F;遍历链表<br>    deleteLink(head);&#x2F;&#x2F;删除链表<br>    isEmpty(head);&#x2F;&#x2F;判断链表是否为空<br>    return 0;<br>}<br>&#x2F;&#x2F;创建链表<br>void createLink(Node *head,int size){<br>    Node *rear &#x3D; head;<br>    int i;<br>    for(i &#x3D; 0;i &lt; size;++i){<br>        Node *newnode &#x3D; (Node*)malloc(sizeof(Node));<br>        newnode -&gt; next &#x3D; NULL;<br>        scanf(“%d”,&amp;newnode-&gt;data);<br>        rear -&gt; next &#x3D; newnode;<br>        rear &#x3D; newnode;<br>    }<br>}<br>&#x2F;&#x2F;遍历链表<br>void travelLink(Node *head){<br>    Node *p &#x3D; head -&gt; next;<br>    while(p !&#x3D; NULL){<br>        printf(“%d\t”,p-&gt;data);<br>        p &#x3D; p -&gt; next;<br>    }<br>    putchar(‘\n’);<br>}<br>&#x2F;&#x2F;头插法<br>void insertForward(Node *head,int data){<br>    Node <em>newnode &#x3D; (Node</em>)malloc(sizeof(Node));<br>    newnode -&gt; next &#x3D; NULL;<br>    newnode -&gt; data &#x3D; data;<br>    newnode -&gt; next &#x3D; head -&gt; next;<br>    head -&gt; next &#x3D; newnode;<br>}<br>&#x2F;&#x2F;尾插法<br>void insertBack(Node *head,int data){<br>    Node <em>newnode &#x3D; (Node</em>)malloc(sizeof(Node));<br>    newnode -&gt; next &#x3D; NULL;<br>    newnode -&gt; data &#x3D; data;<br>    Node *p &#x3D; head;<br>    while(p-&gt;next !&#x3D; NULL){<br>        p &#x3D; p -&gt; next;<br>    }<br>    p -&gt; next &#x3D; newnode;<br>    p &#x3D; newnode;<br>}<br>&#x2F;&#x2F;删除相同元素<br>void deleteSame(Node *head){<br>    Node *curr &#x3D; head -&gt; next;<br>    while(curr !&#x3D; NULL){<br>        Node *pre &#x3D; curr;<br>        Node *p &#x3D; curr -&gt; next;<br>        while(p !&#x3D; NULL){<br>            &#x2F;&#x2F;若有相同的元素，则删除；否则两个指针继续向下走<br>            if(curr-&gt;data &#x3D;&#x3D; p-&gt;data){<br>                pre -&gt; next &#x3D; p -&gt; next;<br>                free(p);<br>                p &#x3D; pre -&gt; next;<br>            }else{<br>                pre &#x3D; pre -&gt; next;<br>                p &#x3D; p -&gt; next;<br>            }<br>        }<br>        curr &#x3D; curr -&gt; next;<br>    }<br>}<br>&#x2F;&#x2F;翻转链表<br>void reverseLink(Node *head){<br>    Node *curr;<br>    Node *pre &#x3D; NULL;<br>    while(head -&gt; next !&#x3D; NULL){<br>        curr &#x3D; head -&gt; next;<br>        head -&gt; next &#x3D; curr -&gt; next;<br>        curr -&gt; next &#x3D; pre;<br>        pre &#x3D; curr;<br>    }<br>    head -&gt; next &#x3D; pre;<br>}<br>&#x2F;&#x2F;删除链表<br>void deleteLink(Node *head){<br>    Node *curr;<br>    while(head -&gt; next !&#x3D; NULL){<br>        curr &#x3D; head -&gt; next;<br>        head -&gt; next &#x3D; curr -&gt; next;<br>        free(curr);<br>    }<br>}<br>&#x2F;&#x2F;判断链表是否为空<br>void isEmpty(Node *head){<br>    if(head -&gt; next &#x3D;&#x3D; NULL){<br>        printf(“链表为空！\n”);<br>    }else{<br>        printf(“链表不为空！\n”);<br>    }<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%8C%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%8C%E8%BE%93%E5%87%BA/" data-id="cl22vvyyt000rl4vje8wwfelm" data-title="链表创建、头插、尾插、删除、翻转、删除相同元素、遍历、判断链表是否为空" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/17/%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          入门数据结构与算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/17/%E7%BC%96%E7%A0%81%E8%A1%A5%E5%85%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2038~42/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2029~31/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/less%2018~22/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
