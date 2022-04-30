@@ -71,6 +71,165 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-反序列化漏洞" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time class="dt-published" datetime="2022-04-30T11:18:23.219Z" itemprop="datePublished">2022-04-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-反序列化漏洞"><a href="#title-反序列化漏洞" class="headerlink" title="title:反序列化漏洞"></a>title:反序列化漏洞</h2><p>序列化		将对象转换成字符串<br>反序列化		将特定格式的字符串转换成对象</p>
+<p>反序列化漏洞也叫对象注入漏洞，即攻击者利用PHP的对象序列化和反序列化进行攻击，将恶意数据注入php代码中进行执行。<br>在PHP中使用serialize()函数可以把变量，包括对象，转化成连续bytes数据。可以将序列化后的变量存在文件里或在网络中传输， 然后通过unserialize()函数反序列化还原为原来的数据（对象）。用序列化和反序列化，完成保存和转储的过程。由于在传输过程中和存放的位置可能被人篡改，从而导致反序列化的对象数据可能携带有攻击者构造的攻击逻辑。<br>参与序列化&#x2F;反序列化的魔术方法有: __construct, __destruct, __sleep, __wakeup, __serialize(&gt;&#x3D;7.4), __unserialize(&gt;&#x3D;7.4)<br>————————————————————————————————<br>php的序列化函数:</p>
+<pre><code> https://www.runoob.com/php/php-serialize-function.html
+</code></pre>
+<p>php反序列化函数:</p>
+<pre><code> https://www.runoob.com/php/php-unserialize-function.html
+</code></pre>
+<p>0x03 PHP 对象序列化<br>在PHP网站中的定义：</p>
+<p>所有PHP里面的值都是可以使用函数serialize（）来返回一个包含字节流的字符串表示。 unserialize()函数能够重新把字符串</p>
+<p>变回PHP原来的值。序列化一个对象将会保存对象的所有变量，但不会保存对象的方法，只会保存类的名字。</p>
+<p>简单的理解序列化：就是把一个类的实例变成一个字符串；</p>
+<p>简单的理解反序列化：就是把一个特殊的字符串转换成一个实例。</p>
+<p><strong>那么为什么要有序列化这种机制存在呢？或者说序列化有什么作用呢？</strong></p>
+<p>因为在传递变量的过程中，有可能遇到变量值要跨脚本文件传递的过程。试想,如果一个脚</p>
+<p>本想要调用之前一个脚本的变量，但是前一个脚本已经执行完毕，所有的变量和内容都已经</p>
+<p>释放掉了，我们要如何操作，才能引用前一个脚本的变量呢？难道要前一个脚本不断的循环</p>
+<p>等待后面脚本的调用，显然这是不现实的。serialize和unserialize（即序列化和反序列</p>
+<p>化)就是用来解决这一问题的。serialize可以将变量转换为字符串并且在变换中可以保存当</p>
+<p>前变量的值；unserialize则可以将serialize生成的字符串转换为变量。</p>
+<p>现在，我们将0x02中的dog对象进行序列化，即将最后一行代码：echo $dog；改</p>
+<p>为echo serialize( $dog);</p>
+<p>输出结果：高亮部分即为序列化的dog对象</p>
+<p>序列化后的字符串格式如下：</p>
+<p>O:6:”animal”:1:{s:4:”name”;s:7:”dahuang”;}<br>对象类型:长度:”名字”:类中变量的个数:{类型:长度:”名字”;类型:长度:”值”;……}<br>O:6:”animal”:1:{s:4:”name”;s:7:”dahuang”;}<br>对象类型:长度:”名字”:类中变量的个数:{类型:长度:”名字”;类型:长度:”值”;……}</p>
+<p>序列化格式中的字母含义：</p>
+<p>a - array                  b - boolean<br>d - double                 i - integer<br>o - common object          r - reference<br>s - string                 C - custom object<br>O - class                  N - null<br>R - pointer reference      U - unicode string</p>
+<p>下面，我们再来探究一个小问题，到我们的变量受到不同修饰符修饰时，会不会有</p>
+<p>不同的结果，以animal类中的name变量为例：</p>
+<p>1.当name受到public修饰时：private $name &#x3D; ‘dahuang’;</p>
+<p>name占用四个字节</p>
+<p>2.当name受到private修饰时：private $name &#x3D; ‘dahuang’;</p>
+<p>类名加上变量名占12个字节，比正常多了两个字节</p>
+<p>3.当name受到protected修饰时：protected $name &#x3D; ‘dahuang’;<br>*name占用七个字节</p>
+<p>通过对比发现，在受保护的成员前都多了两个字节，受保护的成员在序列化时规则：</p>
+<p>受private修饰的私有成员，序列化时: \00 [私有成员所在类名] \00 [私有成员]<br>受protected修饰的成员，序列化时：\00 * \00 [成员]<br>其中，”\00”代表ASCII为0的值，即空字节，” * “ 必不可少。</p>
+<p>0x04 PHP对象反序列化<br>在说明PHP对象反序列化之前，我们来看一下，在PHP的序列化与反序列化过程中</p>
+<p>__sleep()、__wakeup()的调用过程，还是以上面的animal类为例：</p>
+<p>对上面的代码进行简单修改</p>
+<pre><code>&lt;?php
+class animal &#123;
+    public $name = &#39;dahuang&#39;;//define a virable
+    public $age = &#39;20&#39;;
+    public function eat()&#123;//define a simpe method
+        echo $this-&gt;name . &quot; is eatting...\n&quot;;
+    &#125;
+    public function __construct()&#123;
+        echo &quot;the method:__construct is called\n&quot;;
+    &#125;
+    public function __destruct()&#123;
+        echo &quot;the method:__destruct is called\n&quot;;
+    &#125;
+    public function __toString()&#123;
+        return &quot;the method:__toString is called\n&quot;;
+    &#125;
+    public function __wakeup()&#123;
+        echo &quot;the method:__wakeup is called\n&quot;;
+    &#125;
+    public function __sleep()&#123;
+        echo &quot;the method:__sleep is called\n&quot;;
+        return array(&#39;name&#39;,&#39;age&#39;);
+    &#125;
+&#125;
+$dog = new animal();//对类进行实例化时，自动调用__construct()
+echo serialize($dog).&quot;\n&quot;;
+$serializedDog = serialize($dog);//对dog对象进行序列化时，自动调用__sleep()
+echo $serializedDog . &quot;\n&quot;;//echo 序列化的dog对象
+$dog-&gt;eat();//dog对象调用eat()方法
+            //程序结束，调用__destruct()
+?&gt;
+</code></pre>
+<p><strong>那么为什么要有序列化这种机制存在呢？或者说序列化有什么作用呢？</strong></p>
+<p>因为在传递变量的过程中，有可能遇到变量值要跨脚本文件传递的过程。试想,如果一个脚</p>
+<p>本想要调用之前一个脚本的变量，但是前一个脚本已经执行完毕，所有的变量和内容都已经</p>
+<p>释放掉了，我们要如何操作，才能引用前一个脚本的变量呢？难道要前一个脚本不断的循环</p>
+<p>等待后面脚本的调用，显然这是不现实的。serialize和unserialize（即序列化和反序列</p>
+<p>化)就是用来解决这一问题的。serialize可以将变量转换为字符串并且在变换中可以保存当</p>
+<p>前变量的值；unserialize则可以将serialize生成的字符串转换为变量。</p>
+<p>PHP的几个魔法函数，在进行序列化的过程中的调用：</p>
+<p>1、当不进行序列化时: 在进行类的实例化时，自动调用__construct();在输出对象时，自动调用</p>
+<p>__toString()；在程序结束时，自动调用__destruct();__sleep()与__wakeup()均与序列化与反序列化</p>
+<p>有关，在此过程不被调用。</p>
+<p>2、当进行序列化时: 在进行类的实例化时，自动调用__construct();在对创建的dog对象进行序列化</p>
+<p>时，自动调用__sleep()；echo $serializedDog，输出序列化的dog对象，**在此不再调用</p>
+<p>_toString()**；dog兑现调用eat()方法，然后程序结束，调用__destruct().</p>
+<p>3、在整个过程中，__construct()总是在程序的开始调用，__destruct()总是在程序的结束调用，这很</p>
+<p>简单，因为，对所有的变量的初始化总是在程序的开始，释放变量总是在程序结束。</p>
+<p>现在，在上面的基础上，对序列化的dog对象进行反序列化：</p>
+<p>修改代码、如下：</p>
+<pre><code>&lt;?php
+class animal &#123;
+    public $name = &#39;dahuang&#39;;//define a virable
+    public $age = &#39;20&#39;;
+    public function eat()&#123;//define a simpe method
+        echo $this-&gt;name . &quot; is eatting...\n&quot;;
+    &#125;
+    public function __construct()&#123;
+        echo &quot;the method:__construct is called\n&quot;;
+    &#125;
+    public function __destruct()&#123;
+        echo &quot;the method:__destruct is called\n&quot;;
+    &#125;
+    public function __toString()&#123;
+        return &quot;the method:__toString is called\n&quot;;
+    &#125;
+    public function __wakeup()&#123;
+        echo &quot;the method:__wakeup is called\n&quot;;
+    &#125;
+    public function __sleep()&#123;
+        echo &quot;the method:__sleep is called\n&quot;;
+        return array(&#39;name&#39;,&#39;age&#39;);
+    &#125;
+&#125;
+$dog = new animal();//对类进行实例化时，自动调用__construct()
+$serializedDog = serialize($dog);//对dog对象进行序列化时，自动调用__sleep()
+echo $serializedDog . &quot;\n&quot;;//echo 序列化的dog对象
+
+$newDog = unserialize($serializedDog);//反序列化已经被序列化的dog对象，自动调用__wakeup()
+var_dump($newDog);//输出反序列化的结果
+$newDog-&gt;eat();//dog对象调用eat()方法
+               //程序结束，调用__destruct()
+?&gt;
+</code></pre>
+<p>分析一下，在进行序列化与反序列化的过程中，几个魔法函数的调用过程：</p>
+<p>首先，在对animal类进行实例化时，自动调用__construct()对变量进行初始化；然后通过serialize()方</p>
+<p>法对dog对象进行序列化，自动调用__sleep()；输出序列化的dog对象；之后，通过unserialize()方法</p>
+<p>对序列化的dog对象进行反序列化，自动调用__wakeup()方法；输出反序列化的结果，可以看到被序</p>
+<p>列化的dog对象得到了还原；然后通过新的newDog对象调用eat()方法，程序结束，自动调用</p>
+<p>__destruct()方法，注意这里的__construct()被调用了两次，这是因为在整个过程中产生了两个对象</p>
+<p>dog和newDog，在程序结束需要分写释放。</p>
+<p>——————————————————————————————<br>Magic Function”<br>是 php 中一类特殊的方法<br>__construct()：<br>当对象创建（new）时会自动调用。但在 unserialize() 时是不会自动调用的。（构造函数）<br>__destruct()：<br>当对象被销毁时会自动调用。（析构函数）<br>__wakeup()：<br>unserialize() 时会自动调用。<br>__wakeup()<br>使用unserialize时触发<br>__sleep()<br>使用serialize时触发<br>__destruct()<br>对象被销毁时触发<br>__call()<br>在对象上下文中调用不可访问的方法时触发<br>__callStatic()<br>在静态上下文中调用不可访问的方法时触发<br>__get()<br>用于从不可访问的属性读取数据<br>__set()<br>用于将数据写入不可访问的属性<br>__isset()<br>在不可访问的属性上调用isset()或empty()触发<br>__unset()<br>在不可访问的属性上使用unset()时触发<br>__toString()<br>把类当作字符串使用时触发<br>__invoke()<br>当脚本尝试将对象调用为函数时触发<br>——————————————————————<br>例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/nzjdsds/article/details/82703639?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165131765016781435434966%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=165131765016781435434966&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-82703639.142%5Ev9%5Epc_search_result_cache,157%5Ev4%5Econtrol&amp;utm_term=php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/nzjdsds/article/details/82703639?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165131765016781435434966%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=165131765016781435434966&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-82703639.142^v9^pc_search_result_cache,157^v4^control&amp;utm_term=php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8&amp;spm=1018.2226.3001.4187</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" data-id="cl2lsh37o0000dcvjb1qe0q7w" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-less 46~53 order by注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/" class="article-date">
@@ -425,46 +584,6 @@ else
 
 
   
-    <article id="post-算法效率的度量方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2022-04-17T06:04:38.586Z" itemprop="datePublished">2022-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/">算法效率的度量方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>算法效率的度量方法：<br>事后统计方法：通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较（不要这样嘞）<br>事前分析估算方法：在计算机程序编写前，依据统计方法对算法进行估算。<br>影响因素：<br>1、算法采用的策略、方法<br>2、编译产生的代码质量<br>3、问题的输入规模<br>4、机器执行指令的速度<br>（算法的好坏和输入规模）</p>
-<p>我们研究算法的复杂度，侧重的是研究算法随着输入规模扩大增长量的一个抽象，而不是<br>精确的定位需要执行多少次，重要的是把基本操作的数量和输入模式关联起来<br>函数的渐近增长，类似数学的极限等价高阶低阶无穷的判断，即函数的常数项和其他的<br>次要项常常可以忽略。主要关注主项，但可以忽略与主项相乘的常数项。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" data-id="cl22vvyys000pl4vjc1zbcc47" data-title="算法效率的度量方法" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -501,6 +620,10 @@ else
       <ul>
         
           <li>
+            <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
           </li>
         
@@ -514,10 +637,6 @@ else
         
           <li>
             <a href="/2022/04/17/less%2029~31/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/less%2018~22/">(no title)</a>
           </li>
         
       </ul>

